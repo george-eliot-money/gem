@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details - George Eliot Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FFCC00;
+            --light: #F5F5F5;
+            --dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Same as other pages */
+        header {
+            background: linear-gradient(to right, var(--primary), #002244);
+            color: white;
+            padding: 20px 0;
+            border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2em;
+            color: var(--secondary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .logout-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-link {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            border-right: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Account Content */
+        .account-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .account-header h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .account-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .detail-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.1em;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 3px solid var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <div class="logo-text">
+                        <h1>George Eliot Bank</h1>
+                        <p>Account Details</p>
+                    </div>
+                </div>
+                
+                <div class="user-info">
+                    <div id="welcome-message">Welcome, User</div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="transactions.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                <li><a href="account.html" class="nav-link active"><i class="fas fa-user-circle"></i> Account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="account-content">
+            <div class="account-header">
+                <h2>Account Information</h2>
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+            
+            <div class="account-details" id="account-details">
+                <!-- Account details loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 George Eliot Bank. All rights reserved.</p>
+            <p>Secure Banking System | Account Management</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Check if user is logged in
+        const currentAccount = sessionStorage.getItem('currentAccount');
+        if (!currentAccount) {
+            window.location.href = 'index.html';
+        }
+        
+        // Account Data
+        const accountData = {
+            '5673918346243120': {
+                name: 'Noah Perso',
+                type: 'Premium Checking',
+                balance: 12500.75,
+                accountNumber: '3120',
+                email: 'noah@georgeeliotbank.com',
+                phone: '+1 (555) 123-4567',
+                address: '123 Main Street, Anytown, USA',
+                joined: '2022-03-15',
+                status: 'Active'
+            },
+            '3586005802344415': {
+                name: 'Laaroussi',
+                type: 'Savings Account',
+                balance: 8250.50,
+                accountNumber: '4415',
+                email: 'laaroussi@georgeeliotbank.com',
+                phone: '+1 (555) 234-5678',
+                address: '456 Oak Avenue, Sometown, USA',
+                joined: '2021-11-22',
+                status: 'Active'
+            },
+            '0753245061559459': {
+                name: 'nour18',
+                type: 'Student Account',
+                balance: 3400.25,
+                accountNumber: '9459',
+                email: 'nour@georgeeliotbank.com',
+                phone: '+1 (555) 345-6789',
+                address: '789 Pine Road, Othertown, USA',
+                joined: '2023-01-10',
+                status: 'Active'
+            },
+            '4132993413947692': {
+                name: 'Skibidi',
+                type: 'Business Account',
+                balance: 18750.00,
+                accountNumber: '7692',
+                email: 'skibidi@georgeeliotbank.com',
+                phone: '+1 (555) 456-7890',
+                address: '101 Maple Drive, Newtown, USA',
+                joined: '2020-08-05',
+                status: 'Active'
+            }
+        };
+        
+        // Load account details
+        function loadAccountDetails() {
+            if (!currentAccount || !accountData[currentAccount]) {
+                logout();
+                return;
+            }
+            
+            const account = accountData[currentAccount];
+            
+            // Update welcome message
+            document.getElementById('welcome-message').textContent = `Welcome, ${account.name}`;
+            
+            // Format account number
+            const formattedAccountNumber = currentAccount.replace(/(\d{4})(?=\d)/g, '$1 ');
+            
+            // Load account details
+            const detailsDiv = document.getElementById('account-details');
+            detailsDiv.innerHTML = `
+                <div class="detail-card">
+                    <h3>Account Information</h3>
+                    <div class="info-group">
+                        <div class="info-label">Account Holder</div>
+                        <div class="info-value">${account.name}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Account Type</div>
+                        <div class="info-value">${account.type}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Account Number</div>
+                        <div class="info-value">${formattedAccountNumber}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Account Status</div>
+                        <div class="info-value" style="color: green;">${account.status}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Balance Information</h3>
+                    <div class="info-group">
+                        <div class="info-label">Current Balance</div>
+                        <div class="info-value" style="font-size: 1.3em; color: var(--primary); font-weight: bold;">
+                            $${account.balance.toFixed(2)}
+                        </div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Available Balance</div>
+                        <div class="info-value">$${account.balance.toFixed(2)}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Account Since</div>
+                        <div class="info-value">${account.joined}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Contact Information</h3>
+                    <div class="info-group">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value">${account.email}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Phone Number</div>
+                        <div class="info-value">${account.phone}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Mailing Address</div>
+                        <div class="info-value">${account.address}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Security Information</h3>
+                    <div class="info-group">
+                        <div class="info-label">Last Login</div>
+                        <div class="info-value">${new Date().toLocaleString()}</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Account Security</div>
+                        <div class="info-value">PIN Protected</div>
+                    </div>
+                    <div class="info-group">
+                        <div class="info-label">Two-Factor Authentication</div>
+                        <div class="info-value">Not Enabled</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Helper functions
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('currentAccount');
+            window.location.href = 'index.html';
+        }
+        
+        // Initialize
+        window.onload = loadAccountDetails;
+    </script>
+</body>
+</html>
