@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>George Eliot Bank - Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 2012 Business Website Style */
         :root {
@@ -31,7 +31,6 @@
             color: var(--dark);
             line-height: 1.6;
             font-size: 14px;
-            background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23e0e0e0" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
         }
 
         .container {
@@ -66,9 +65,6 @@
         .logo i {
             font-size: 2.2em;
             color: var(--secondary);
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 5px;
         }
 
         .logo-text h1 {
@@ -90,6 +86,33 @@
 
         .system-info strong {
             color: var(--secondary);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .lang-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: bold;
         }
 
         /* Navigation */
@@ -133,42 +156,16 @@
 
         /* Main Content */
         .main-content {
-            display: flex;
             margin: 20px 0;
-            gap: 20px;
         }
 
-        .content {
-            flex: 3;
+        .welcome-section {
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 3px;
+            margin-bottom: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border: 1px solid #DDDDDD;
-        }
-
-        .sidebar {
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #DDDDDD;
-        }
-
-        /* Page System */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         h2 {
@@ -180,42 +177,39 @@
             font-weight: bold;
         }
 
-        h3 {
-            color: var(--primary);
-            margin: 15px 0 10px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        /* Home Page Content */
-        .welcome-banner {
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            color: white;
+        /* Login Form */
+        .login-form {
+            background: var(--light);
             padding: 25px;
             border-radius: 3px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .feature-box {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 3px;
-            border-left: 4px solid var(--secondary);
             border: 1px solid #DDDDDD;
+            max-width: 500px;
+            margin: 20px auto;
         }
 
-        .feature-box i {
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
             color: var(--primary);
-            font-size: 2em;
-            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #CCCCCC;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,102,204,0.3);
         }
 
         /* Buttons */
@@ -245,21 +239,61 @@
             color: var(--primary);
         }
 
-        .btn-success {
-            background: var(--success);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-        }
-
-        .btn-warning {
-            background: var(--warning);
-        }
-
         .btn-block {
             width: 100%;
             display: block;
+        }
+
+        /* Barcode Scanner */
+        .barcode-section {
+            background: white;
+            padding: 25px;
+            border-radius: 3px;
+            margin: 20px 0;
+            border: 1px solid #DDDDDD;
+            text-align: center;
+        }
+
+        #scanner-container {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 20px auto;
+            border: 3px dashed var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .barcode-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            font-size: 16px;
+            text-align: center;
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 12px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            border-left: 4px solid;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left-color: var(--danger);
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left-color: var(--success);
         }
 
         /* Footer */
@@ -272,83 +306,17 @@
             font-size: 0.9em;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-section h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            color: #CCCCCC;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary);
         }
 
         .copyright {
             text-align: center;
             padding-top: 20px;
             color: #999999;
-        }
-
-        /* Sidebar Widgets */
-        .widget {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 3px;
-            margin-bottom: 20px;
-            border: 1px solid #DDDDDD;
-        }
-
-        .widget h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            border-bottom: 1px solid #DDDDDD;
-            padding-bottom: 8px;
-        }
-
-        /* Language Selector */
-        .language-selector {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            padding: 5px;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 2px;
-        }
-
-        .lang-btn.active {
-            background: var(--secondary);
-            color: var(--primary);
         }
 
         /* Responsive */
@@ -358,20 +326,12 @@
                 padding: 0 15px;
             }
             
-            .main-content {
+            .nav-menu {
                 flex-direction: column;
             }
             
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-menu {
-                flex-wrap: wrap;
-            }
-            
             .nav-menu li {
-                flex: 1 0 50%;
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -380,320 +340,194 @@
     <!-- Header -->
     <header>
         <div class="container">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+            </div>
+            
             <div class="header-top">
                 <div class="logo">
-                    <i class="fa fa-bank"></i>
+                    <i class="fas fa-university"></i>
                     <div class="logo-text">
-                        <h1 id="app-title">George Eliot Bank</h1>
-                        <div class="tagline" id="app-tagline">Secure Banking Solutions Since 2012</div>
+                        <h1 data-i18n="app.title">George Eliot Bank</h1>
+                        <div class="tagline" data-i18n="app.tagline">Secure Banking Solutions Since 2012</div>
                     </div>
                 </div>
                 <div class="system-info">
-                    <div><strong>System:</strong> Secure Banking v2.0</div>
-                    <div><strong>Status:</strong> Online</div>
-                    <div><i class="fa fa-shield"></i> Barcode Scanner Enabled</div>
+                    <div><strong>System:</strong> Online Banking v2.0</div>
+                    <div><strong>Status:</strong> <span style="color: #4CAF50;">Secure</span></div>
+                    <div><i class="fas fa-shield-alt"></i> Barcode Scanner Enabled</div>
                 </div>
             </div>
             
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active"><i class="fa fa-home"></i> <span id="nav-home">Home</span></a></li>
-                    <li><a href="login.html" class="nav-link"><i class="fa fa-sign-in"></i> <span id="nav-login">Login</span></a></li>
-                    <li><a href="dashboard.html" class="nav-link"><i class="fa fa-dashboard"></i> <span id="nav-dashboard">Dashboard</span></a></li>
+                    <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span data-i18n="nav.home">Home</span></a></li>
+                    <li><a href="dashboard.html" class="nav-link"><i class="fas fa-dashboard"></i> <span data-i18n="nav.dashboard">Dashboard</span></a></li>
+                    <li><a href="transactions.html" class="nav-link"><i class="fas fa-exchange-alt"></i> <span data-i18n="nav.transactions">Transactions</span></a></li>
+                    <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> <span data-i18n="nav.account">Account</span></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
-        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-    </div>
-
     <!-- Main Content -->
-    <div class="container">
+    <main class="container">
         <div class="main-content">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <div class="widget">
-                    <h3><i class="fa fa-info-circle"></i> <span id="quick-stats">Quick Stats</span></h3>
-                    <div>
-                        <div><strong id="total-accounts-label">Total Accounts:</strong> 4</div>
-                        <div><strong id="system-status-label">System Status:</strong> <span style="color: green;">Online</span></div>
-                        <div><strong id="languages-label">Languages:</strong> EN/AR/FR</div>
-                    </div>
-                </div>
+            <div class="welcome-section">
+                <h2 data-i18n="home.welcome">Welcome to George Eliot Bank</h2>
+                <p data-i18n="home.description">Experience secure banking with our 2012-style business platform. Access your account using barcode scanning or manual entry.</p>
                 
-                <div class="widget">
-                    <h3><i class="fa fa-bullhorn"></i> <span id="announcements">Announcements</span></h3>
-                    <div style="color: var(--accent); font-weight: bold;">
-                        <i class="fa fa-star"></i> <span id="announcement1">New Barcode Scanner Feature!</span>
-                    </div>
-                    <div style="margin-top: 10px; font-size: 0.9em;">
-                        <span id="announcement2">Scan your account barcode for quick login</span>
-                    </div>
-                </div>
-                
-                <div class="widget">
-                    <h3><i class="fa fa-clock-o"></i> <span id="business-hours">Business Hours</span></h3>
-                    <div>
-                        <div><strong id="hours-weekdays">Mon-Fri:</strong> 9AM-6PM</div>
-                        <div><strong id="hours-saturday">Saturday:</strong> 9AM-2PM</div>
-                        <div><strong id="hours-sunday">Sunday:</strong> Closed</div>
-                    </div>
+                <div class="alert" style="background: #d1ecf1; color: #0c5460; border-left-color: var(--accent);">
+                    <i class="fas fa-info-circle"></i> 
+                    <span data-i18n="home.info">This system uses separate file storage and supports barcode scanning for quick account access.</span>
                 </div>
             </div>
 
-            <!-- Main Content Area -->
-            <div class="content">
-                <div class="welcome-banner">
-                    <h2 id="welcome-title">Welcome to George Eliot Bank</h2>
-                    <p id="welcome-message">Your trusted partner for secure banking and financial solutions since 2012.</p>
+            <div class="barcode-section">
+                <h3 data-i18n="login.scan_title">Quick Login with Barcode</h3>
+                <div id="scanner-container"></div>
+                <div style="margin: 20px 0;">
+                    <button class="btn btn-secondary" onclick="startScanner()" id="start-scanner">
+                        <i class="fas fa-camera"></i> <span data-i18n="login.start_scan">Start Barcode Scanner</span>
+                    </button>
+                    <button class="btn" onclick="stopScanner()" id="stop-scanner" style="display: none;">
+                        <i class="fas fa-stop"></i> <span data-i18n="login.stop_scan">Stop Scanner</span>
+                    </button>
+                </div>
+                <p data-i18n="login.or_manual">- OR -</p>
+                <input type="text" class="barcode-input" id="manual-barcode" placeholder="Enter barcode or account ID manually" data-i18n-placeholder="login.barcode_placeholder">
+            </div>
+
+            <div class="login-form">
+                <h3 data-i18n="login.title">Account Login</h3>
+                <div id="login-message"></div>
+                
+                <div class="form-group">
+                    <label for="account-id" data-i18n="login.account_id">Account ID</label>
+                    <input type="text" id="account-id" placeholder="Enter 16-digit account ID" maxlength="16">
                 </div>
                 
-                <div class="features-grid">
-                    <div class="feature-box">
-                        <i class="fa fa-shield"></i>
-                        <h4 id="feature1-title">Secure Banking</h4>
-                        <p id="feature1-desc">256-bit encryption and secure PIN authentication for all accounts.</p>
-                    </div>
-                    
-                    <div class="feature-box">
-                        <i class="fa fa-barcode"></i>
-                        <h4 id="feature2-title">Barcode Login</h4>
-                        <p id="feature2-desc">Quick login using barcode scanning technology for convenience.</p>
-                    </div>
-                    
-                    <div class="feature-box">
-                        <i class="fa fa-globe"></i>
-                        <h4 id="feature3-title">Multilingual</h4>
-                        <p id="feature3-desc">Full support for English, Arabic, and French languages.</p>
-                    </div>
-                    
-                    <div class="feature-box">
-                        <i class="fa fa-mobile"></i>
-                        <h4 id="feature4-title">Cross-Device</h4>
-                        <p id="feature4-desc">Access your account from any device with a modern browser.</p>
-                    </div>
+                <div class="form-group">
+                    <label for="pin" data-i18n="login.pin">PIN Code</label>
+                    <input type="password" id="pin" placeholder="Enter your PIN">
                 </div>
                 
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="login.html" class="btn btn-secondary" style="padding: 12px 30px; font-size: 16px;">
-                        <i class="fa fa-sign-in"></i> <span id="login-button">Login to Your Account</span>
-                    </a>
-                </div>
+                <button class="btn btn-block" onclick="loginAccount()">
+                    <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.login_button">Login to Account</span>
+                </button>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3 id="footer-about">About Us</h3>
-                    <p id="footer-about-text">George Eliot Bank provides secure banking services with a focus on customer convenience and multilingual support.</p>
+            <div class="footer-content">
+                <div>
+                    <h3 style="color: var(--secondary); margin-bottom: 10px;">George Eliot Bank</h3>
+                    <p data-i18n="footer.address">123 Banking Street, Financial District</p>
+                    <p data-i18n="footer.phone">Phone: 1-800-BANK-GEB</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h3 id="footer-links">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html"><i class="fa fa-home"></i> <span id="footer-home">Home</span></a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-in"></i> <span id="footer-login">Login</span></a></li>
-                        <li><a href="dashboard.html"><i class="fa fa-dashboard"></i> <span id="footer-dashboard">Dashboard</span></a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 id="footer-contact">Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fa fa-phone"></i> 1-800-BANK-GEB</li>
-                        <li><i class="fa fa-envelope"></i> support@georgeeliotbank.com</li>
-                        <li><i class="fa fa-map-marker"></i> Global Banking Network</li>
-                    </ul>
+                <div>
+                    <h3 style="color: var(--secondary); margin-bottom: 10px;" data-i18n="footer.hours">Business Hours</h3>
+                    <p data-i18n="footer.weekdays">Mon-Fri: 9:00 AM - 6:00 PM</p>
+                    <p data-i18n="footer.saturday">Saturday: 10:00 AM - 2:00 PM</p>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p id="footer-copyright">© 2012-2023 George Eliot Bank. All rights reserved.</p>
-                <p id="footer-system">Secure Banking System | Barcode Scanner | Multilingual Support</p>
+                <p data-i18n="footer.copyright">© 2012-2023 George Eliot Bank. All rights reserved.</p>
+                <p data-i18n="footer.security">Secure Banking System | Barcode Scanner Enabled</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Files -->
+    <script src="translations.js"></script>
+    <script src="database.js"></script>
+    <script src="scanner.js"></script>
     <script>
-        // Translations Data
-        const translations = {
-            en: {
-                // App
-                'app-title': 'George Eliot Bank',
-                'app-tagline': 'Secure Banking Solutions Since 2012',
-                
-                // Navigation
-                'nav-home': 'Home',
-                'nav-login': 'Login',
-                'nav-dashboard': 'Dashboard',
-                
-                // Home Page
-                'welcome-title': 'Welcome to George Eliot Bank',
-                'welcome-message': 'Your trusted partner for secure banking and financial solutions since 2012.',
-                'login-button': 'Login to Your Account',
-                
-                // Features
-                'feature1-title': 'Secure Banking',
-                'feature1-desc': '256-bit encryption and secure PIN authentication for all accounts.',
-                'feature2-title': 'Barcode Login',
-                'feature2-desc': 'Quick login using barcode scanning technology for convenience.',
-                'feature3-title': 'Multilingual',
-                'feature3-desc': 'Full support for English, Arabic, and French languages.',
-                'feature4-title': 'Cross-Device',
-                'feature4-desc': 'Access your account from any device with a modern browser.',
-                
-                // Sidebar
-                'quick-stats': 'Quick Stats',
-                'total-accounts-label': 'Total Accounts:',
-                'system-status-label': 'System Status:',
-                'languages-label': 'Languages:',
-                'announcements': 'Announcements',
-                'announcement1': 'New Barcode Scanner Feature!',
-                'announcement2': 'Scan your account barcode for quick login',
-                'business-hours': 'Business Hours',
-                'hours-weekdays': 'Mon-Fri:',
-                'hours-saturday': 'Saturday:',
-                'hours-sunday': 'Sunday:',
-                
-                // Footer
-                'footer-about': 'About Us',
-                'footer-about-text': 'George Eliot Bank provides secure banking services with a focus on customer convenience and multilingual support.',
-                'footer-links': 'Quick Links',
-                'footer-home': 'Home',
-                'footer-login': 'Login',
-                'footer-dashboard': 'Dashboard',
-                'footer-contact': 'Contact Info',
-                'footer-copyright': '© 2012-2023 George Eliot Bank. All rights reserved.',
-                'footer-system': 'Secure Banking System | Barcode Scanner | Multilingual Support'
-            },
-            
-            ar: {
-                'app-title': 'بنك جورج إليوت',
-                'app-tagline': 'حلول مصرفية آمنة منذ 2012',
-                'nav-home': 'الرئيسية',
-                'nav-login': 'تسجيل الدخول',
-                'nav-dashboard': 'لوحة التحكم',
-                'welcome-title': 'مرحباً بك في بنك جورج إليوت',
-                'welcome-message': 'شريكك الموثوق للحلول المصرفية والمالية الآمنة منذ 2012.',
-                'login-button': 'تسجيل الدخول إلى حسابك',
-                'feature1-title': 'خدمات مصرفية آمنة',
-                'feature1-desc': 'تشفير 256 بت ومصادقة PIN آمنة لجميع الحسابات.',
-                'feature2-title': 'تسجيل الدخول بالباركود',
-                'feature2-desc': 'تسجيل دخول سريع باستخدام تقنية مسح الباركود للراحة.',
-                'feature3-title': 'متعدد اللغات',
-                'feature3-desc': 'دعم كامل للغات الإنجليزية والعربية والفرنسية.',
-                'feature4-title': 'متعدد الأجهزة',
-                'feature4-desc': 'الوصول إلى حسابك من أي جهاز باستخدام متصفح حديث.',
-                'quick-stats': 'إحصائيات سريعة',
-                'total-accounts-label': 'إجمالي الحسابات:',
-                'system-status-label': 'حالة النظام:',
-                'languages-label': 'اللغات:',
-                'announcements': 'الإعلانات',
-                'announcement1': 'ميزة جديدة لمسح الباركود!',
-                'announcement2': 'امسح باركود حسابك لتسجيل دخول سريع',
-                'business-hours': 'ساعات العمل',
-                'hours-weekdays': 'الإثنين-الجمعة:',
-                'hours-saturday': 'السبت:',
-                'hours-sunday': 'الأحد:',
-                'footer-about': 'من نحن',
-                'footer-about-text': 'يقدم بنك جورج إليوت خدمات مصرفية آمنة مع التركيز على راحة العملاء والدعم متعدد اللغات.',
-                'footer-links': 'روابط سريعة',
-                'footer-home': 'الرئيسية',
-                'footer-login': 'تسجيل الدخول',
-                'footer-dashboard': 'لوحة التحكم',
-                'footer-contact': 'معلومات الاتصال',
-                'footer-copyright': '© 2012-2023 بنك جورج إليوت. جميع الحقوق محفوظة.',
-                'footer-system': 'نظام مصرفي آمن | ماسح الباركود | دعم متعدد اللغات'
-            },
-            
-            fr: {
-                'app-title': 'Banque George Eliot',
-                'app-tagline': 'Solutions Bancaires Sécurisées Depuis 2012',
-                'nav-home': 'Accueil',
-                'nav-login': 'Connexion',
-                'nav-dashboard': 'Tableau de Bord',
-                'welcome-title': 'Bienvenue à la Banque George Eliot',
-                'welcome-message': 'Votre partenaire de confiance pour des solutions bancaires et financières sécurisées depuis 2012.',
-                'login-button': 'Se Connecter à Votre Compte',
-                'feature1-title': 'Banque Sécurisée',
-                'feature1-desc': 'Chiffrement 256 bits et authentification PIN sécurisée pour tous les comptes.',
-                'feature2-title': 'Connexion par Code-barres',
-                'feature2-desc': 'Connexion rapide utilisant la technologie de scan de code-barres pour plus de commodité.',
-                'feature3-title': 'Multilingue',
-                'feature3-desc': 'Support complet pour les langues anglais, arabe et français.',
-                'feature4-title': 'Multi-Appareils',
-                'feature4-desc': 'Accédez à votre compte depuis n\'importe quel appareil avec un navigateur moderne.',
-                'quick-stats': 'Statistiques Rapides',
-                'total-accounts-label': 'Total des Comptes:',
-                'system-status-label': 'Statut du Système:',
-                'languages-label': 'Langues:',
-                'announcements': 'Annonces',
-                'announcement1': 'Nouvelle Fonctionnalité de Scan de Code-barres!',
-                'announcement2': 'Scannez votre code-barres de compte pour une connexion rapide',
-                'business-hours': 'Heures d\'Ouverture',
-                'hours-weekdays': 'Lun-Ven:',
-                'hours-saturday': 'Samedi:',
-                'hours-saturday': 'Samedi:',
-                'hours-sunday': 'Dimanche:',
-                'footer-about': 'À Propos',
-                'footer-about-text': 'La Banque George Eliot fournit des services bancaires sécurisés avec un accent sur la commodité des clients et le support multilingue.',
-                'footer-links': 'Liens Rapides',
-                'footer-home': 'Accueil',
-                'footer-login': 'Connexion',
-                'footer-dashboard': 'Tableau de Bord',
-                'footer-contact': 'Informations de Contact',
-                'footer-copyright': '© 2012-2023 Banque George Eliot. Tous droits réservés.',
-                'footer-system': 'Système Bancaire Sécurisé | Scanner Code-barres | Support Multilingue'
-            }
-        };
+        // Load translations
+        loadTranslations();
         
-        // Set Language Function
-        function setLanguage(lang) {
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        // Login function
+        function loginAccount() {
+            let accountId = document.getElementById('account-id').value.trim();
+            const pin = document.getElementById('pin').value.trim();
+            const messageDiv = document.getElementById('login-message');
             
-            // Update direction for Arabic
-            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            // Clean account ID
+            accountId = accountId.replace(/\s+/g, '');
             
-            // Update all translatable elements
-            for (const [key, value] of Object.entries(translations[lang])) {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = value;
-                }
+            if (!accountId || accountId.length !== 16) {
+                showAlert('Please enter a valid 16-digit Account ID', 'error', messageDiv);
+                return;
             }
             
-            // Store language preference
-            localStorage.setItem('preferred-language', lang);
+            if (!pin) {
+                showAlert('Please enter your PIN', 'error', messageDiv);
+                return;
+            }
+            
+            const account = BankDatabase.getAccount(accountId);
+            
+            if (!account) {
+                showAlert('Account not found. Please check your Account ID.', 'error', messageDiv);
+                return;
+            }
+            
+            // Check PIN (case-sensitive for special PINs)
+            if (account.pin !== pin) {
+                showAlert('Invalid PIN. Please try again.', 'error', messageDiv);
+                return;
+            }
+            
+            // Update last login
+            BankDatabase.updateLastLogin(accountId);
+            
+            // Store account in session
+            sessionStorage.setItem('currentAccount', accountId);
+            sessionStorage.setItem('accountName', account.name);
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
         }
         
-        // Load preferred language on page load
-        window.onload = function() {
-            const preferredLang = localStorage.getItem('preferred-language') || 'en';
-            const langBtn = document.querySelector(`.lang-btn[onclick*="${preferredLang}"]`);
-            if (langBtn) {
-                langBtn.classList.add('active');
-                setLanguage(preferredLang);
-            }
+        // Alert function
+        function showAlert(message, type, container) {
+            const alertClass = type === 'error' ? 'alert-error' : 'alert-success';
+            const icon = type === 'error' ? 'exclamation-circle' : 'check-circle';
             
-            // Set direction for Arabic
-            if (preferredLang === 'ar') {
-                document.body.dir = 'rtl';
+            container.innerHTML = `
+                <div class="alert ${alertClass}">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+        }
+        
+        // Auto-fill from barcode input
+        document.getElementById('manual-barcode').addEventListener('input', function(e) {
+            const value = this.value.trim();
+            // If it looks like an account ID, fill the account field
+            if (value.length === 16 && /^\d+$/.test(value)) {
+                document.getElementById('account-id').value = value;
+                document.getElementById('pin').focus();
             }
-        };
+        });
+        
+        // Set language
+        function setLanguage(lang) {
+            if (window.setLanguage) {
+                window.setLanguage(lang);
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+        }
+        
+        // Initialize scanner
+        initBarcodeScanner();
     </script>
 </body>
 </html>
