@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - George Eliot Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse styles from dashboard with some modifications */
+        :root {
+            --primary: #003366;
+            --secondary: #FFCC00;
+            --light: #F5F5F5;
+            --dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Same as dashboard */
+        header {
+            background: linear-gradient(to right, var(--primary), #002244);
+            color: white;
+            padding: 20px 0;
+            border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2em;
+            color: var(--secondary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .logout-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-link {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            border-right: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Transactions Content */
+        .transactions-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .transactions-header h2 {
+            color: var(--primary);
+            font-size: 1.8em;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transactions-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .transactions-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .transactions-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .transaction-type {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .type-deposit {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .type-withdrawal {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .type-transfer {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 3px solid var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <div class="logo-text">
+                        <h1>George Eliot Bank</h1>
+                        <p>Transaction History</p>
+                    </div>
+                </div>
+                
+                <div class="user-info">
+                    <div id="welcome-message">Welcome, User</div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="transactions.html" class="nav-link active"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> Account</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="transactions-content">
+            <div class="transactions-header">
+                <h2>All Transactions</h2>
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+            
+            <div id="transactions-list">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-body">
+                        <!-- Transactions loaded by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 George Eliot Bank. All rights reserved.</p>
+            <p>Secure Banking System | Complete Transaction History</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Check if user is logged in
+        const currentAccount = sessionStorage.getItem('currentAccount');
+        if (!currentAccount) {
+            window.location.href = 'index.html';
+        }
+        
+        // Account Data
+        const accountData = {
+            '5673918346243120': {
+                name: 'Noah Perso',
+                transactions: [
+                    { date: '2023-12-28', description: 'Salary Deposit', type: 'DEPOSIT', amount: 3200.00, balance: 12500.75 },
+                    { date: '2023-12-27', description: 'Rent Payment', type: 'WITHDRAWAL', amount: -1500.00, balance: 9300.75 },
+                    { date: '2023-12-25', description: 'Online Shopping', type: 'WITHDRAWAL', amount: -250.00, balance: 10800.75 },
+                    { date: '2023-12-22', description: 'Bank Transfer', type: 'TRANSFER', amount: 500.00, balance: 11050.75 },
+                    { date: '2023-12-20', description: 'ATM Withdrawal', type: 'WITHDRAWAL', amount: -200.00, balance: 10550.75 },
+                    { date: '2023-12-18', description: 'Grocery Store', type: 'WITHDRAWAL', amount: -85.50, balance: 10750.75 }
+                ]
+            },
+            '3586005802344415': {
+                name: 'Laaroussi',
+                transactions: [
+                    { date: '2023-12-27', description: 'Interest Earned', type: 'DEPOSIT', amount: 25.50, balance: 8250.50 },
+                    { date: '2023-12-24', description: 'Transfer to Checking', type: 'TRANSFER', amount: -1000.00, balance: 8225.00 },
+                    { date: '2023-12-20', description: 'Deposit', type: 'DEPOSIT', amount: 500.00, balance: 9225.00 },
+                    { date: '2023-12-17', description: 'Online Payment', type: 'WITHDRAWAL', amount: -75.00, balance: 8725.00 }
+                ]
+            },
+            '0753245061559459': {
+                name: 'nour18',
+                transactions: [
+                    { date: '2023-12-26', description: 'ATM Withdrawal', type: 'WITHDRAWAL', amount: -200.00, balance: 3400.25 },
+                    { date: '2023-12-23', description: 'Online Purchase', type: 'WITHDRAWAL', amount: -89.99, balance: 3600.25 },
+                    { date: '2023-12-20', description: 'Part-time Job', type: 'DEPOSIT', amount: 450.00, balance: 3690.24 },
+                    { date: '2023-12-17', description: 'Coffee Shop', type: 'WITHDRAWAL', amount: -15.00, balance: 3240.24 }
+                ]
+            },
+            '4132993413947692': {
+                name: 'Skibidi',
+                transactions: [
+                    { date: '2023-12-28', description: 'Business Revenue', type: 'DEPOSIT', amount: 450.00, balance: 18750.00 },
+                    { date: '2023-12-24', description: 'Charity Donation', type: 'WITHDRAWAL', amount: -500.00, balance: 18300.00 },
+                    { date: '2023-12-21', description: 'Equipment Purchase', type: 'WITHDRAWAL', amount: -1200.00, balance: 18800.00 },
+                    { date: '2023-12-18', description: 'Client Payment', type: 'DEPOSIT', amount: 2500.00, balance: 20000.00 }
+                ]
+            }
+        };
+        
+        // Load transactions
+        function loadTransactions() {
+            if (!currentAccount || !accountData[currentAccount]) {
+                logout();
+                return;
+            }
+            
+            const account = accountData[currentAccount];
+            
+            // Update welcome message
+            document.getElementById('welcome-message').textContent = `Welcome, ${account.name}`;
+            
+            // Load all transactions
+            const tbody = document.getElementById('transactions-body');
+            if (account.transactions && account.transactions.length > 0) {
+                tbody.innerHTML = account.transactions.map(t => `
+                    <tr>
+                        <td>${t.date}</td>
+                        <td>${t.description}</td>
+                        <td>
+                            <span class="transaction-type type-${t.type.toLowerCase()}">
+                                ${t.type}
+                            </span>
+                        </td>
+                        <td style="color: ${t.amount > 0 ? 'green' : 'red'}; font-weight: bold;">
+                            ${t.amount > 0 ? '+' : ''}$${Math.abs(t.amount).toFixed(2)}
+                        </td>
+                        <td>$${t.balance.toFixed(2)}</td>
+                    </tr>
+                `).join('');
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No transactions found</td></tr>';
+            }
+        }
+        
+        // Helper functions
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('currentAccount');
+            window.location.href = 'index.html';
+        }
+        
+        // Initialize
+        window.onload = loadTransactions;
+    </script>
+</body>
+</html>
