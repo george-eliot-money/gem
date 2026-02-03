@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Eliot Bank - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.css">
+    <style>
+        /* 2012 Business Website Style */
+        :root {
+            --primary: #003366; /* Dark Blue */
+            --secondary: #FFCC00; /* Yellow */
+            --accent: #0066CC; /* Light Blue */
+            --light: #F5F5F5;
+            --dark: #333333;
+            --gray: #999999;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 14px;
+            background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23e0e0e0" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .container {
+            width: 980px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to bottom, var(--primary), #002244);
+            color: white;
+            padding: 15px 0;
+            border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.2em;
+            color: var(--secondary);
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-text .tagline {
+            font-size: 0.9em;
+            color: #CCCCCC;
+            font-style: italic;
+        }
+
+        .system-info {
+            text-align: right;
+            font-size: 0.9em;
+        }
+
+        .system-info strong {
+            color: var(--secondary);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 0;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            flex: 1;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            display: block;
+            font-weight: bold;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            background-color: var(--accent);
+            color: var(--secondary);
+        }
+
+        .nav-link.active {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            margin: 20px 0;
+            gap: 20px;
+        }
+
+        .content {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #DDDDDD;
+        }
+
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #DDDDDD;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin: 15px 0 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* Login Form */
+        .login-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 3px;
+            border: 1px solid #DDDDDD;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #CCCCCC;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,102,204,0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Barcode Scanner */
+        .barcode-section {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            margin: 20px 0;
+            border: 2px dashed var(--primary);
+        }
+
+        #scanner-container {
+            width: 100%;
+            height: 300px;
+            background: black;
+            margin: 15px auto;
+            border-radius: 3px;
+            overflow: hidden;
+            display: none;
+        }
+
+        #scanner-view {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scanner-controls {
+            margin: 15px 0;
+        }
+
+        /* Manual Input */
+        .manual-input {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #DDDDDD;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 12px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left-color: var(--success);
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left-color: var(--danger);
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left-color: var(--warning);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 3px solid var(--secondary);
+            font-size: 0.9em;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #CCCCCC;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            color: #999999;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            padding: 5px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+
+        .lang-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .container {
+                width: 100%;
+                padding: 0 15px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+            
+            .nav-menu li {
+                flex: 1 0 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fa fa-bank"></i>
+                    <div class="logo-text">
+                        <h1 id="app-title">George Eliot Bank</h1>
+                        <div class="tagline" id="app-tagline">Secure Banking Login</div>
+                    </div>
+                </div>
+                <div class="system-info">
+                    <div><strong>System:</strong> Login v2.0</div>
+                    <div><strong>Scanner:</strong> <span id="scanner-status">Ready</span></div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link"><i class="fa fa-home"></i> <span id="nav-home">Home</span></a></li>
+                    <li><a href="login.html" class="nav-link active"><i class="fa fa-sign-in"></i> <span id="nav-login">Login</span></a></li>
+                    <li><a href="dashboard.html" class="nav-link"><i class="fa fa-dashboard"></i> <span id="nav-dashboard">Dashboard</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="widget" style="background: var(--light); padding: 15px; border-radius: 3px; margin-bottom: 20px; border: 1px solid #DDDDDD;">
+                    <h3><i class="fa fa-info-circle"></i> <span id="login-help">Login Help</span></h3>
+                    <p id="help-text1">Use your 16-digit Account ID and PIN to login.</p>
+                    <p id="help-text2">Or scan your account barcode for quick access.</p>
+                </div>
+                
+                <div class="widget" style="background: var(--light); padding: 15px; border-radius: 3px; border: 1px solid #DDDDDD;">
+                    <h3><i class="fa fa-shield"></i> <span id="security-title">Security Tips</span></h3>
+                    <ul style="padding-left: 20px;">
+                        <li id="tip1">Never share your PIN</li>
+                        <li id="tip2">Logout after each session</li>
+                        <li id="tip3">Keep barcode secure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="content">
+                <h2><i class="fa fa-sign-in"></i> <span id="login-title">Bank Account Login</span></h2>
+                
+                <div id="login-message"></div>
+                
+                <!-- Barcode Scanner Section -->
+                <div class="barcode-section">
+                    <h3><i class="fa fa-barcode"></i> <span id="barcode-title">Barcode Scanner</span></h3>
+                    <p id="barcode-help">Point camera at your account barcode</p>
+                    
+                    <div id="scanner-container">
+                        <video id="scanner-view" autoplay playsinline></video>
+                    </div>
+                    
+                    <div class="scanner-controls">
+                        <button class="btn btn-success" onclick="startScanner()" id="start-btn">
+                            <i class="fa fa-camera"></i> <span id="start-scan">Start Scanner</span>
+                        </button>
+                        <button class="btn btn-danger" onclick="stopScanner()" id="stop-btn" style="display: none;">
+                            <i class="fa fa-stop"></i> <span id="stop-scan">Stop Scanner</span>
+                        </button>
+                    </div>
+                    
+                    <p id="or-text">- OR -</p>
+                </div>
+                
+                <!-- Manual Login Form -->
+                <div class="login-form">
+                    <h3><i class="fa fa-keyboard-o"></i> <span id="manual-title">Manual Login</span></h3>
+                    
+                    <div class="form-group">
+                        <label for="account-id"><i class="fa fa-id-card"></i> <span id="account-id-label">Account ID</span></label>
+                        <input type="text" id="account-id" placeholder="Enter 16-digit Account ID" maxlength="16">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pin"><i class="fa fa-lock"></i> <span id="pin-label">PIN Code</span></label>
+                        <input type="password" id="pin" placeholder="Enter your PIN">
+                    </div>
+                    
+                    <button class="btn btn-block" onclick="login()">
+                        <i class="fa fa-unlock"></i> <span id="login-button">Login to Account</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3 id="footer-about">George Eliot Bank</h3>
+                    <p id="footer-about-text">Secure banking with barcode scanning technology.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 id="footer-links">Quick Access</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fa fa-home"></i> <span id="footer-home">Home</span></a></li>
+                        <li><a href="login.html"><i class="fa fa-sign-in"></i> <span id="footer-login">Login</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 id="footer-contact">Support</h3>
+                    <ul class="footer-links">
+                        <li><i class="fa fa-phone"></i> 1-800-BANK-GEB</li>
+                        <li><i class="fa fa-envelope"></i> help@georgeeliotbank.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p id="footer-copyright">© 2012-2023 George Eliot Bank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quagga Barcode Scanner -->
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Translations Data for Login Page
+        const translations = {
+            en: {
+                // App
+                'app-title': 'George Eliot Bank',
+                'app-tagline': 'Secure Banking Login',
+                
+                // Navigation
+                'nav-home': 'Home',
+                'nav-login': 'Login',
+                'nav-dashboard': 'Dashboard',
+                
+                // Login Page
+                'login-title': 'Bank Account Login',
+                'login-button': 'Login to Account',
+                
+                // Barcode Section
+                'barcode-title': 'Barcode Scanner',
+                'barcode-help': 'Point camera at your account barcode',
+                'start-scan': 'Start Scanner',
+                'stop-scan': 'Stop Scanner',
+                'or-text': '- OR -',
+                
+                // Manual Login
+                'manual-title': 'Manual Login',
+                'account-id-label': 'Account ID',
+                'pin-label': 'PIN Code',
+                
+                // Sidebar
+                'login-help': 'Login Help',
+                'help-text1': 'Use your 16-digit Account ID and PIN to login.',
+                'help-text2': 'Or scan your account barcode for quick access.',
+                'security-title': 'Security Tips',
+                'tip1': 'Never share your PIN',
+                'tip2': 'Logout after each session',
+                'tip3': 'Keep barcode secure',
+                
+                // Footer
+                'footer-about': 'George Eliot Bank',
+                'footer-about-text': 'Secure banking with barcode scanning technology.',
+                'footer-links': 'Quick Access',
+                'footer-home': 'Home',
+                'footer-login': 'Login',
+                'footer-contact': 'Support',
+                'footer-copyright': '© 2012-2023 George Eliot Bank. All rights reserved.'
+            },
+            
+            ar: {
+                'app-title': 'بنك جورج إليوت',
+                'app-tagline': 'تسجيل دخول آمن',
+                'nav-home': 'الرئيسية',
+                'nav-login': 'تسجيل الدخول',
+                'nav-dashboard': 'لوحة التحكم',
+                'login-title': 'تسجيل دخول الحساب المصرفي',
+                'login-button': 'تسجيل الدخول إلى الحساب',
+                'barcode-title': 'ماسح الباركود',
+                'barcode-help': 'وجّه الكاميرا نحو باركود حسابك',
+                'start-scan': 'بدء الماسح',
+                'stop-scan': 'إيقاف الماسح',
+                'or-text': '- أو -',
+                'manual-title': 'تسجيل دخول يدوي',
+                'account-id-label': 'رقم الحساب',
+                'pin-label': 'رمز PIN',
+                'login-help': 'مساعدة تسجيل الدخول',
+                'help-text1': 'استخدم رقم حسابك المكون من 16 رقمًا ورمز PIN لتسجيل الدخول.',
+                'help-text2': 'أو امسح باركود حسابك للوصول السريع.',
+                'security-title': 'نصائح الأمان',
+                'tip1': 'لا تشارك رمز PIN الخاص بك أبدًا',
+                'tip2': 'قم بتسجيل الخروج بعد كل جلسة',
+                'tip3': 'احتفظ بالباركود آمنًا',
+                'footer-about': 'بنك جورج إليوت',
+                'footer-about-text': 'خدمات مصرفية آمنة مع تقنية مسح الباركود.',
+                'footer-links': 'وصول سريع',
+                'footer-home': 'الرئيسية',
+                'footer-login': 'تسجيل الدخول',
+                'footer-contact': 'الدعم',
+                'footer-copyright': '© 2012-2023 بنك جورج إليوت. جميع الحقوق محفوظة.'
+            },
+            
+            fr: {
+                'app-title': 'Banque George Eliot',
+                'app-tagline': 'Connexion Bancaire Sécurisée',
+                'nav-home': 'Accueil',
+                'nav-login': 'Connexion',
+                'nav-dashboard': 'Tableau de Bord',
+                'login-title': 'Connexion au Compte Bancaire',
+                'login-button': 'Se Connecter au Compte',
+                'barcode-title': 'Scanner de Code-barres',
+                'barcode-help': 'Pointez la caméra vers votre code-barres de compte',
+                'start-scan': 'Démarrer le Scanner',
+                'stop-scan': 'Arrêter le Scanner',
+                'or-text': '- OU -',
+                'manual-title': 'Connexion Manuel',
+                'account-id-label': 'ID du Compte',
+                'pin-label': 'Code PIN',
+                'login-help': 'Aide à la Connexion',
+                'help-text1': 'Utilisez votre ID de compte à 16 chiffres et votre PIN pour vous connecter.',
+                'help-text2': 'Ou scannez votre code-barres de compte pour un accès rapide.',
+                'security-title': 'Conseils de Sécurité',
+                'tip1': 'Ne partagez jamais votre PIN',
+                'tip2': 'Déconnectez-vous après chaque session',
+                'tip3': 'Gardez le code-barres sécurisé',
+                'footer-about': 'Banque George Eliot',
+                'footer-about-text': 'Banque sécurisée avec technologie de scan de code-barres.',
+                'footer-links': 'Accès Rapide',
+                'footer-home': 'Accueil',
+                'footer-login': 'Connexion',
+                'footer-contact': 'Support',
+                'footer-copyright': '© 2012-2023 Banque George Eliot. Tous droits réservés.'
+            }
+        };
+        
+        // Language Functions
+        function setLanguage(lang) {
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update direction for Arabic
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update all translatable elements
+            for (const [key, value] of Object.entries(translations[lang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                }
+            }
+            
+            // Update placeholders
+            document.getElementById('account-id').placeholder = lang === 'en' ? 'Enter 16-digit Account ID' : 
+                                                               lang === 'ar' ? 'أدخل رقم الحساب المكون من 16 رقمًا' : 
+                                                               'Entrez l\'ID de compte à 16 chiffres';
+            document.getElementById('pin').placeholder = lang === 'en' ? 'Enter your PIN' : 
+                                                        lang === 'ar' ? 'أدخل رمز PIN الخاص بك' : 
+                                                        'Entrez votre PIN';
+            
+            // Store language preference
+            localStorage.setItem('preferred-language', lang);
+        }
+        
+        // Barcode Scanner Variables
+        let scannerActive = false;
+        let stream = null;
+        
+        // Start Barcode Scanner
+        function startScanner() {
+            if (scannerActive) return;
+            
+            const scannerContainer = document.getElementById('scanner-container');
+            const video = document.getElementById('scanner-view');
+            const startBtn = document.getElementById('start-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            
+            // Show scanner container
+            scannerContainer.style.display = 'block';
+            
+            // Request camera access
+            navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'environment',
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                },
+                audio: false 
+            })
+            .then(function(mediaStream) {
+                stream = mediaStream;
+                video.srcObject = stream;
+                scannerActive = true;
+                
+                // Show/hide buttons
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'inline-block';
+                
+                // Start Quagga barcode scanner
+                Quagga.init({
+                    inputStream: {
+                        name: "Live",
+                        type: "LiveStream",
+                        target: video,
+                        constraints: {
+                            width: 640,
+                            height: 480,
+                            facingMode: "environment"
+                        }
+                    },
+                    decoder: {
+                        readers: ["code_128_reader", "ean_reader", "upc_reader"]
+                    },
+                    locate: true
+                }, function(err) {
+                    if (err) {
+                        console.error("Quagga error:", err);
+                        showMessage("Scanner error: " + err.message, "error");
+                        return;
+                    }
+                    
+                    Quagga.start();
+                    
+                    Quagga.onDetected(function(result) {
+                        const code = result.codeResult.code;
+                        processBarcode(code);
+                    });
+                });
+                
+                showMessage("Scanner started successfully", "success");
+                document.getElementById('scanner-status').textContent = "Active";
+            })
+            .catch(function(err) {
+                console.error("Camera error:", err);
+                showMessage("Camera access denied. Please allow camera permissions.", "error");
+                
+                // Fallback: Use manual input
+                scannerContainer.innerHTML = `
+                    <div style="color: white; padding: 20px; text-align: center;">
+                        <i class="fa fa-camera" style="font-size: 3em; margin-bottom: 10px;"></i>
+                        <p>Camera access required for barcode scanning.</p>
+                        <p>Please use manual login below.</p>
+                    </div>
+                `;
+                scannerContainer.style.display = 'block';
+            });
+        }
+        
+        // Stop Barcode Scanner
+        function stopScanner() {
+            if (!scannerActive) return;
+            
+            const scannerContainer = document.getElementById('scanner-container');
+            const startBtn = document.getElementById('start-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            
+            // Stop Quagga
+            Quagga.stop();
+            
+            // Stop camera stream
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            
+            // Hide scanner container
+            scannerContainer.style.display = 'none';
+            
+            // Show/hide buttons
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            
+            scannerActive = false;
+            showMessage("Scanner stopped", "info");
+            document.getElementById('scanner-status').textContent = "Ready";
+        }
+        
+        // Process Scanned Barcode
+        function processBarcode(barcode) {
+            // Map barcodes to account IDs (for demo)
+            const barcodeMap = {
+                'GEB001': '5673918346243120',
+                'GEB002': '3586005802344415',
+                'GEB003': '0753245061559459',
+                'GEB004': '4132993413947692'
+            };
+            
+            let accountId = barcodeMap[barcode];
+            
+            if (!accountId) {
+                // Check if barcode is already an account ID
+                if (barcode.length === 16 && /^\d+$/.test(barcode)) {
+                    accountId = barcode;
+                }
+            }
+            
+            if (accountId) {
+                document.getElementById('account-id').value = accountId;
+                document.getElementById('pin').focus();
+                showMessage("Barcode scanned successfully! PIN field focused.", "success");
+                
+                // Auto-stop scanner after successful scan
+                setTimeout(stopScanner, 1000);
+            } else {
+                showMessage("Invalid barcode format. Please scan a valid account barcode.", "error");
+            }
+        }
+        
+        // Login Function
+        function login() {
+            const accountId = document.getElementById('account-id').value.trim();
+            const pin = document.getElementById('pin').value.trim();
+            
+            // Validate inputs
+            if (!accountId || accountId.length !== 16) {
+                showMessage("Please enter a valid 16-digit Account ID", "error");
+                return;
+            }
+            
+            if (!pin) {
+                showMessage("Please enter your PIN", "error");
+                return;
+            }
+            
+            // Demo accounts validation
+            const validAccounts = {
+                '5673918346243120': '6458',
+                '3586005802344415': '2003',
+                '0753245061559459': '2011',
+                '4132993413947692': 'FVNE SHYT'
+            };
+            
+            if (validAccounts[accountId] === pin) {
+                // Store account in session storage
+                sessionStorage.setItem('currentAccount', accountId);
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                showMessage("Invalid Account ID or PIN", "error");
+            }
+        }
+        
+        // Show Message
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('login-message');
+            const alertClass = type === 'error' ? 'alert-error' : 
+                              type === 'success' ? 'alert-success' : 'alert-warning';
+            
+            messageDiv.innerHTML = `
+                <div class="alert ${alertClass}">
+                    <i class="fa fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+                    ${message}
+                </div>
+            `;
+            
+            // Auto-hide success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.innerHTML = '';
+                }, 3000);
+            }
+        }
+        
+        // Load preferred language on page load
+        window.onload = function() {
+            const preferredLang = localStorage.getItem('preferred-language') || 'en';
+            const langBtn = document.querySelector(`.lang-btn[onclick*="${preferredLang}"]`);
+            if (langBtn) {
+                langBtn.classList.add('active');
+                setLanguage(preferredLang);
+            }
+            
+            // Set direction for Arabic
+            if (preferredLang === 'ar') {
+                document.body.dir = 'rtl';
+            }
+            
+            // Stop scanner if page is being unloaded
+            window.addEventListener('beforeunload', function() {
+                if (scannerActive) {
+                    stopScanner();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
