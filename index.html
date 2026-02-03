@@ -1,16 +1,425 @@
-<html>
-    <body>
-      <titel>THE END</titel>
-        <h1> STOOOOOOOOOOPPPPPP</h1>
-      <p>    Bonjour,
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>George Eliot Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Simple Banking Style */
+        :root {
+            --primary: #003366; /* Bank Blue */
+            --secondary: #FFCC00; /* Gold */
+            --light: #F5F5F5;
+            --dark: #333333;
+            --success: #28a745;
+            --danger: #dc3545;
+        }
 
-    Je vous informe que, pour des raisons personnelles / professionnelles, je dois me retirer du projet G.E.B.
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    Je m’assurerai de bien transmettre tous les éléments en cours et resterai disponible pour faciliter la transition jusqu’au 7/1/2026.
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    Je vous remercie pour la confiance et souhaite plein de réussite à l’équipe pour la suite.
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    Cordialement,
-    Noah</p>
-    </body>
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary), #002244);
+            color: white;
+            padding: 20px 0;
+            border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .logo i {
+            font-size: 2.5em;
+            color: var(--secondary);
+        }
+
+        .logo-text h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lang-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            border-top: 5px solid var(--secondary);
+        }
+
+        .login-card h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,51,102,0.1);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .demo-accounts {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .demo-accounts h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .account-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .account-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .account-id {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .account-pin {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 3px solid var(--secondary);
+            margin-top: auto;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid var(--danger);
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid var(--success);
+        }
+
+        /* Quick Input */
+        .quick-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quick-btn {
+            flex: 1;
+            background: #e9ecef;
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .quick-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ar">AR</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <div class="logo-text">
+                    <h1>George Eliot Bank</h1>
+                    <p>Secure Banking Solutions</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="login-card">
+                <h2 data-i18n="login.title">Bank Account Login</h2>
+                
+                <div id="login-message"></div>
+                
+                <form id="login-form" onsubmit="login(); return false;">
+                    <div class="form-group">
+                        <label for="account-id" data-i18n="login.account_id">Account ID</label>
+                        <input type="text" id="account-id" placeholder="Enter 16-digit account ID" maxlength="16" required>
+                        <div class="quick-input">
+                            <button type="button" class="quick-btn" onclick="fillAccount('5673918346243120')">Noah Perso</button>
+                            <button type="button" class="quick-btn" onclick="fillAccount('3586005802344415')">Laaroussi</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pin" data-i18n="login.pin">PIN Code</label>
+                        <input type="password" id="pin" placeholder="Enter your PIN" required>
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span data-i18n="login.login_button">Login to Account</span>
+                    </button>
+                </form>
+                
+                <div class="demo-accounts">
+                    <h3 data-i18n="login.demo_accounts">Demo Accounts</h3>
+                    <div class="account-list">
+                        <div class="account-item">
+                            <div class="account-id">5673918346243120</div>
+                            <div>Noah Perso / <span class="account-pin">6458</span></div>
+                        </div>
+                        <div class="account-item">
+                            <div class="account-id">3586005802344415</div>
+                            <div>Laaroussi / <span class="account-pin">2003</span></div>
+                        </div>
+                        <div class="account-item">
+                            <div class="account-id">0753245061559459</div>
+                            <div>nour18 / <span class="account-pin">2011</span></div>
+                        </div>
+                        <div class="account-item">
+                            <div class="account-id">4132993413947692</div>
+                            <div>Skibidi / <span class="account-pin">FVNE SHYT</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-i18n="footer.copyright">© 2023 George Eliot Bank. All rights reserved.</p>
+            <p data-i18n="footer.security">Secure Banking System | No Camera Required</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="translations.js"></script>
+    <script>
+        // Initialize language
+        setLanguage('en');
+        
+        // Language switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                setLanguage(lang);
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Fill account ID helper
+        function fillAccount(accountId) {
+            document.getElementById('account-id').value = accountId;
+            document.getElementById('pin').focus();
+        }
+        
+        // Login function
+        function login() {
+            const accountId = document.getElementById('account-id').value.trim();
+            const pin = document.getElementById('pin').value.trim();
+            const messageDiv = document.getElementById('login-message');
+            
+            // Basic validation
+            if (!accountId || accountId.length !== 16) {
+                showAlert('Please enter a valid 16-digit Account ID', 'error', messageDiv);
+                return;
+            }
+            
+            if (!pin) {
+                showAlert('Please enter your PIN', 'error', messageDiv);
+                return;
+            }
+            
+            // For demo purposes - check against hardcoded accounts
+            const validAccounts = {
+                '5673918346243120': '6458',
+                '3586005802344415': '2003', 
+                '0753245061559459': '2011',
+                '4132993413947692': 'FVNE SHYT'
+            };
+            
+            if (validAccounts[accountId] === pin) {
+                // Store account ID for dashboard
+                sessionStorage.setItem('currentAccount', accountId);
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                showAlert('Invalid Account ID or PIN', 'error', messageDiv);
+            }
+        }
+        
+        // Alert helper
+        function showAlert(message, type, container) {
+            const alertClass = type === 'error' ? 'alert-error' : 'alert-success';
+            const icon = type === 'error' ? 'exclamation-circle' : 'check-circle';
+            
+            container.innerHTML = `
+                <div class="alert ${alertClass}">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+        }
+    </script>
+</body>
 </html>
