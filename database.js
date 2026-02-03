@@ -8,49 +8,43 @@ const BankDatabase = {
         '5673918346243120': {
             name: 'Noah Perso',
             type: 'Premium Checking',
-            balance: 12500.75,
+            balance: 2000.00,
             accountNumber: '3120',
             pin: '6458',
-            email: 'noah@georgeeliotbank.com',
-            phone: '+1 (555) 123-4567',
-            address: '123 Main Street, Anytown, USA',
+            email: 'noahbernocco@gmail.com',
+            phone: '+212 665-937383',
+            address: 'not saying it',
             transactions: [
-                { date: '2023-12-28', description: 'Salary Deposit', type: 'DEPOSIT', amount: 3200.00, balance: 12500.75 },
-                { date: '2023-12-27', description: 'Rent Payment', type: 'WITHDRAWAL', amount: -1500.00, balance: 9300.75 },
-                { date: '2023-12-25', description: 'Online Shopping', type: 'WITHDRAWAL', amount: -250.00, balance: 10800.75 },
-                { date: '2023-12-22', description: 'Bank Transfer', type: 'TRANSFER', amount: 500.00, balance: 11050.75 }
+                { null },
+               
             ],
             lastLogin: null
         },
         '3586005802344415': {
             name: 'Laaroussi',
             type: 'Savings Account',
-            balance: 8250.50,
+            balance: 2000.00,
             accountNumber: '4415',
             pin: '2003',
-            email: 'laaroussi@georgeeliotbank.com',
-            phone: '+1 (555) 234-5678',
-            address: '456 Oak Avenue, Sometown, USA',
+            email: 'noting ...',
+            phone: 'didnt remember',
+            address: 'IDK',
             transactions: [
-                { date: '2023-12-27', description: 'Interest Earned', type: 'DEPOSIT', amount: 25.50, balance: 8250.50 },
-                { date: '2023-12-24', description: 'Transfer to Checking', type: 'TRANSFER', amount: -1000.00, balance: 8225.00 },
-                { date: '2023-12-20', description: 'Deposit', type: 'DEPOSIT', amount: 500.00, balance: 9225.00 }
+                { null }
             ],
             lastLogin: null
         },
         '0753245061559459': {
             name: 'nour18',
             type: 'Student Account',
-            balance: 3400.25,
+            balance: 5000.00,
             accountNumber: '9459',
             pin: '2011',
-            email: 'nour@georgeeliotbank.com',
-            phone: '+1 (555) 345-6789',
-            address: '789 Pine Road, Othertown, USA',
+            email: 'sorry',
+            phone: 'i want to swear on all of the acounts',
+            address: ' le transport ',
             transactions: [
-                { date: '2023-12-26', description: 'ATM Withdrawal', type: 'WITHDRAWAL', amount: -200.00, balance: 3400.25 },
-                { date: '2023-12-23', description: 'Online Purchase', type: 'WITHDRAWAL', amount: -89.99, balance: 3600.25 },
-                { date: '2023-12-20', description: 'Part-time Job', type: 'DEPOSIT', amount: 450.00, balance: 3690.24 }
+                { null }
             ],
             lastLogin: null
         },
@@ -60,13 +54,11 @@ const BankDatabase = {
             balance: 18750.00,
             accountNumber: '7692',
             pin: 'FVNE SHYT',
-            email: 'skibidi@georgeeliotbank.com',
-            phone: '+1 (555) 456-7890',
-            address: '101 Maple Drive, Newtown, USA',
+            email: ' BITCH SHAKALAKA',
+            phone: ' YES GOD',
+            address: 'YES GOD',
             transactions: [
-                { date: '2023-12-28', description: 'Business Revenue', type: 'DEPOSIT', amount: 450.00, balance: 18750.00 },
-                { date: '2023-12-24', description: 'Charity Donation', type: 'WITHDRAWAL', amount: -500.00, balance: 18300.00 },
-                { date: '2023-12-21', description: 'Equipment Purchase', type: 'WITHDRAWAL', amount: -1200.00, balance: 18800.00 }
+                { null }
             ],
             lastLogin: null
         }
@@ -74,10 +66,10 @@ const BankDatabase = {
 
     // Barcode Mappings
     BARCODES: {
-        '5673918346243120': 'GEB001',
-        '3586005802344415': 'GEB002',
-        '0753245061559459': 'GEB003',
-        '4132993413947692': 'GEB004'
+        '5673918346243120': '5673 9183 4624 3120',
+        '3586005802344415': '3586 0058 0234 4415',
+        '0753245061559459': '0753 2450 6155 9459',
+        '4132993413947692': '4132 9934 1394 7692'
     },
 
     // Helper Functions
