@@ -51,7 +51,7 @@ const BankDatabase = {
         '4132993413947692': {
             name: 'Skibidi',
             type: 'Business Account',
-            balance: 18750.00,
+            balance: 0.00,
             accountNumber: '7692',
             pin: 'FVNE SHYT',
             email: ' BITCH SHAKALAKA',
