@@ -17,6 +17,7 @@
             --success: #4CAF50;
             --warning: #FF9800;
             --danger: #F44336;
+            --formulary: #8B4513; /* Brown for formulary banner */
         }
 
         * {
@@ -31,6 +32,80 @@
             color: var(--dark);
             line-height: 1.6;
             font-size: 14px;
+        }
+
+        /* FORMULARY BANNER - ADDED STYLES */
+        .formulary-banner {
+            background: linear-gradient(to right, var(--formulary), #A0522D);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .formulary-banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .formulary-text {
+            flex: 1;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .formulary-text i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .formulary-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .formulary-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .close-banner {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 15px;
+            padding: 0 8px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close-banner:hover {
+            opacity: 1;
+            color: var(--secondary);
         }
 
         .container {
@@ -326,6 +401,16 @@
                 padding: 0 15px;
             }
             
+            .formulary-banner-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .formulary-text {
+                text-align: center;
+            }
+            
             .nav-menu {
                 flex-direction: column;
             }
@@ -337,6 +422,25 @@
     </style>
 </head>
 <body>
+    <!-- FORMULARY BANNER - ADDED SECTION -->
+    <div class="formulary-banner" id="formularyBanner">
+        <div class="formulary-banner-content">
+            <div class="formulary-text">
+                <i class="fas fa-file-alt"></i>
+                <span data-i18n="formulary.message">Please complete our customer feedback formulary to help us improve our services</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <a href="https://forms.gle/phiT7zpPHLvUJfmq8" target="_blank" class="formulary-btn" data-i18n="formulary.button">
+                    <i class="fas fa-external-link-alt"></i>
+                    Go to Formulary
+                </a>
+                <button class="close-banner" onclick="closeBanner()" title="Close banner">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -450,6 +554,35 @@
     <script>
         // Load translations
         loadTranslations();
+        
+        // FORMULARY BANNER FUNCTIONS - ADDED
+        function closeBanner() {
+            const banner = document.getElementById('formularyBanner');
+            banner.style.display = 'none';
+            // Store in localStorage to remember user's preference
+            localStorage.setItem('formularyBannerClosed', 'true');
+        }
+        
+        // Check if user previously closed the banner
+        document.addEventListener('DOMContentLoaded', function() {
+            const bannerClosed = localStorage.getItem('formularyBannerClosed');
+            if (bannerClosed === 'true') {
+                document.getElementById('formularyBanner').style.display = 'none';
+            }
+            
+            // Auto-close banner after 30 seconds
+            setTimeout(function() {
+                const banner = document.getElementById('formularyBanner');
+                if (banner.style.display !== 'none') {
+                    banner.style.opacity = '0.9';
+                }
+            }, 30000);
+        });
+        
+        // Open formulary in new tab
+        function openFormulary() {
+            window.open('https://forms.gle/phiT7zpPHLvUJfmq8', '_blank');
+        }
         
         // Login function
         function loginAccount() {
