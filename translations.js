@@ -8,20 +8,7 @@ const Translations = {
         // Navigation
         'nav.home': 'Home',
         'nav.dashboard': 'Dashboard',
-        'nav.transactions': 'Transactions',
-        'nav.account': 'Account',
-        
-        // Login
-        'login.title': 'Account Login',
-        'login.subtitle': 'Secure access to your banking dashboard',
-        'login.scan_title': 'Quick Login with Barcode',
-        'login.start_scan': 'Start Barcode Scanner',
-        'login.stop_scan': 'Stop Scanner',
-        'login.or_manual': '- OR -',
-        'login.barcode_placeholder': 'Enter barcode manually (e.g., GEB001)',
-        'login.account_id': 'Account ID',
-        'login.pin': 'PIN Code',
-        'login.login_button': 'Login to Account'
+        'nav.account': 'Account'
     },
     
     ar: {
@@ -30,19 +17,7 @@ const Translations = {
         
         'nav.home': 'الصفحة الرئيسية',
         'nav.dashboard': 'لوحة التحكم',
-        'nav.transactions': 'المعاملات',
-        'nav.account': 'الحساب',
-        
-        'login.title': 'تسجيل دخول الحساب',
-        'login.subtitle': 'وصول آمن إلى لوحة التحكم المصرفية',
-        'login.scan_title': 'تسجيل دخول سريع بالباركود',
-        'login.start_scan': 'بدء ماسح الباركود',
-        'login.stop_scan': 'إيقاف الماسح',
-        'login.or_manual': '- أو -',
-        'login.barcode_placeholder': 'أدخل الباركود يدوياً (مثال: GEB001)',
-        'login.account_id': 'رقم الحساب',
-        'login.pin': 'رمز PIN',
-        'login.login_button': 'تسجيل الدخول إلى الحساب'
+        'nav.account': 'الحساب'
     },
     
     fr: {
@@ -51,19 +26,7 @@ const Translations = {
         
         'nav.home': 'Accueil',
         'nav.dashboard': 'Tableau de Bord',
-        'nav.transactions': 'Transactions',
-        'nav.account': 'Compte',
-        
-        'login.title': 'Connexion au Compte',
-        'login.subtitle': 'Accès sécurisé à votre tableau de bord bancaire',
-        'login.scan_title': 'Connexion Rapide avec Code-barres',
-        'login.start_scan': 'Démarrer le Scanner de Code-barres',
-        'login.stop_scan': 'Arrêter le Scanner',
-        'login.or_manual': '- OU -',
-        'login.barcode_placeholder': 'Entrez le code-barres manuellement (ex: GEB001)',
-        'login.account_id': 'ID du Compte',
-        'login.pin': 'Code PIN',
-        'login.login_button': 'Se Connecter au Compte'
+        'nav.account': 'Compte'
     }
 };
 
@@ -97,27 +60,13 @@ function setLanguage(lang) {
             }
         });
         
-        // Update placeholder texts
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-            const key = element.getAttribute('data-i18n-placeholder');
-            if (Translations[lang][key]) {
-                element.placeholder = Translations[lang][key];
-            }
-        });
-        
         return true;
     }
     return false;
-}
-
-function t(key) {
-    return Translations[currentLanguage][key] || Translations.en[key] || key;
 }
 
 // Export for browser
 if (typeof window !== 'undefined') {
     window.loadTranslations = loadTranslations;
     window.setLanguage = setLanguage;
-    window.t = t;
-    window.Translations = Translations;
 }
