@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - George Eliot Bank</title>
+    <title>George Eliot Bank - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,6 +12,7 @@
             --accent: #0066CC;
             --light: #F5F5F5;
             --dark: #333333;
+            --formulary: #8B4513;
         }
 
         * {
@@ -31,40 +32,89 @@
             padding: 20px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* FORMULARY BANNER */
+        .formulary-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, var(--formulary), #A0522D);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* Back to Home Button */
-        .back-home {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: bold;
+        .formulary-banner-content {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .formulary-text {
+            flex: 1;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .formulary-text i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .formulary-btn {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            z-index: 1000;
             transition: all 0.3s;
         }
 
-        .back-home:hover {
+        .formulary-btn:hover {
             background: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
+        .close-banner {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close-banner:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 60px auto 20px;
+        }
+
         /* Language Selector */
         .language-selector {
             position: fixed;
-            top: 20px;
+            top: 60px;
             right: 20px;
             background: rgba(255,255,255,0.9);
             padding: 5px;
@@ -96,7 +146,6 @@
             overflow: hidden;
             display: flex;
             min-height: 600px;
-            margin-top: 20px;
         }
 
         /* Left Side - Bank Info */
@@ -291,36 +340,34 @@
             position: relative;
         }
 
-        /* Demo Accounts */
-        .demo-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
+        /* Footer */
+        .login-footer {
+            text-align: center;
             margin-top: 30px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .demo-section h4 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .demo-accounts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .demo-account {
-            background: white;
-            padding: 10px;
-            border-radius: 3px;
+            color: #666;
             font-size: 0.9em;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Currency Symbol Style */
+        .currency {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #4CAF50;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .formulary-banner-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .formulary-text {
+                text-align: center;
+            }
+            
             .login-container {
                 flex-direction: column;
             }
@@ -333,25 +380,31 @@
                 padding: 30px 20px;
             }
             
-            .back-home {
-                top: 10px;
-                left: 10px;
-                padding: 8px 15px;
-                font-size: 0.9em;
-            }
-            
             .language-selector {
-                top: 10px;
-                right: 10px;
+                top: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Back to Home Button -->
-    <a href="index.html" class="back-home">
-        <i class="fas fa-arrow-left"></i> Back to Home
-    </a>
+    <!-- FORMULARY BANNER -->
+    <div class="formulary-banner" id="formularyBanner">
+        <div class="formulary-banner-content">
+            <div class="formulary-text">
+                <i class="fas fa-file-alt"></i>
+                <span>Please complete our customer feedback formulary to help us improve our services</span>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <a href="https://forms.gle/phiT7zpPHLvUJfmq8" target="_blank" class="formulary-btn">
+                    <i class="fas fa-external-link-alt"></i>
+                    Go to Formulary
+                </a>
+                <button class="close-banner" onclick="closeBanner()" title="Close banner">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Language Selector -->
     <div class="language-selector">
@@ -368,36 +421,36 @@
                 <div class="bank-logo">
                     <i class="fas fa-university"></i>
                     <h1>George Eliot Bank</h1>
-                    <div class="tagline">Secure Account Login</div>
+                    <div class="tagline">Secure Banking Solutions Since 2012</div>
                 </div>
 
                 <div class="bank-features">
                     <div class="feature">
                         <i class="fas fa-shield-alt"></i>
                         <div>
-                            <h3>Secure Login</h3>
-                            <p>256-bit encryption protects your credentials</p>
+                            <h3>Secure Banking</h3>
+                            <p>Military-grade encryption for all transactions</p>
                         </div>
                     </div>
                     <div class="feature">
                         <i class="fas fa-barcode"></i>
                         <div>
                             <h3>Barcode Scanner</h3>
-                            <p>Quick login with camera barcode scanning</p>
+                            <p>Quick login with barcode technology</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h3>Multi-language</h3>
+                            <p>Available in English, Arabic, and French</p>
                         </div>
                     </div>
                     <div class="feature">
                         <i class="fas fa-mobile-alt"></i>
                         <div>
-                            <h3>Mobile Friendly</h3>
-                            <p>Login from any device, anywhere</p>
-                        </div>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-history"></i>
-                        <div>
-                            <h3>Activity Logging</h3>
-                            <p>All login attempts are securely logged</p>
+                            <h3>Mobile Ready</h3>
+                            <p>Access your account from any device</p>
                         </div>
                     </div>
                 </div>
@@ -407,7 +460,7 @@
             <div class="login-form-container">
                 <div class="login-header">
                     <h2>Account Login</h2>
-                    <p>Enter your credentials or use barcode scanner</p>
+                    <p>Secure access to your banking dashboard</p>
                 </div>
 
                 <!-- Login Message -->
@@ -457,26 +510,11 @@
                     </button>
                 </form>
 
-                <!-- Demo Accounts -->
-                <div class="demo-section">
-                    <h4>Demo Accounts (Try these):</h4>
-                    <div class="demo-accounts">
-                        <div class="demo-account">
-                            <strong>Noah Perso</strong><br>
-                            Barcode: 5673 9183 4624 3120<br>
-                            PIN: 6458
-                        </div>
-                        <div class="demo-account">
-                            <strong>Laaroussi</strong><br>
-                            Barcode: 3586 0058 0234 4415<br>
-                            PIN: 2003
-                        </div>
-                        <div class="demo-account">
-                            <strong>nour18</strong><br>
-                            Barcode: 0753 2450 6155 9459<br>
-                            PIN: 2011
-                        </div>
-                    </div>
+                <!-- Demo Accounts Hint -->
+                <div class="login-footer">
+                    <p><strong>Demo Accounts:</strong> Use barcode or account ID with PIN</p>
+                    <p>Barcode: <code>5673 9183 4624 3120</code> | PIN: <code>6458</code></p>
+                    <p>Barcode: <code>3586 0058 0234 4415</code> | PIN: <code>2003</code></p>
                 </div>
             </div>
         </div>
@@ -498,11 +536,6 @@
             if (currentAccount) {
                 window.location.href = 'dashboard.html';
             }
-            
-            // Load translations
-            if (typeof loadTranslations === 'function') {
-                loadTranslations();
-            }
         });
         
         // Load database from JSON
@@ -516,6 +549,18 @@
                 showAlert('Error loading database. Please try again later.', 'error', 
                           document.getElementById('login-message'));
             }
+        }
+        
+        // Formulary banner functions
+        function closeBanner() {
+            const banner = document.getElementById('formularyBanner');
+            banner.style.display = 'none';
+            localStorage.setItem('formularyBannerClosed', 'true');
+        }
+        
+        // Check if banner was previously closed
+        if (localStorage.getItem('formularyBannerClosed') === 'true') {
+            document.getElementById('formularyBanner').style.display = 'none';
         }
         
         // Login function
