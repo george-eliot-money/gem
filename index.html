@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>George Eliot Bank - Home</title>
+    <title>George Eliot Bank - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 2012 Business Website Style */
         :root {
-            --primary: #003366; /* Dark Blue */
-            --secondary: #FFCC00; /* Yellow */
-            --accent: #0066CC; /* Light Blue */
+            --primary: #003366;
+            --secondary: #FFCC00;
+            --accent: #0066CC;
             --light: #F5F5F5;
             --dark: #333333;
-            --gray: #999999;
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --danger: #F44336;
-            --formulary: #8B4513; /* Brown for formulary banner */
+            --formulary: #8B4513;
         }
 
         * {
@@ -28,20 +23,26 @@
         }
 
         body {
-            background-color: #f0f0f0;
-            color: var(--dark);
-            line-height: 1.6;
-            font-size: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* FORMULARY BANNER - ADDED STYLES */
+        /* FORMULARY BANNER */
         .formulary-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             background: linear-gradient(to right, var(--formulary), #A0522D);
             color: white;
             padding: 12px 0;
             text-align: center;
             border-bottom: 2px solid var(--secondary);
-            position: relative;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
@@ -50,22 +51,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 980px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
         .formulary-text {
             flex: 1;
             text-align: left;
             font-weight: bold;
-            font-size: 1em;
         }
 
         .formulary-text i {
             color: var(--secondary);
             margin-right: 10px;
-            font-size: 1.2em;
         }
 
         .formulary-btn {
@@ -76,13 +75,11 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9em;
-            transition: all 0.3s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap;
+            transition: all 0.3s;
         }
 
         .formulary-btn:hover {
@@ -98,7 +95,6 @@
             cursor: pointer;
             font-size: 1.2em;
             margin-left: 15px;
-            padding: 0 8px;
             opacity: 0.8;
             transition: opacity 0.3s;
         }
@@ -108,183 +104,175 @@
             color: var(--secondary);
         }
 
+        /* Main Container */
         .container {
-            width: 980px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(to bottom, var(--primary), #002244);
-            color: white;
-            padding: 15px 0;
-            border-bottom: 3px solid var(--secondary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo i {
-            font-size: 2.2em;
-            color: var(--secondary);
-        }
-
-        .logo-text h1 {
-            font-size: 1.8em;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo-text .tagline {
-            font-size: 0.9em;
-            color: #CCCCCC;
-            font-style: italic;
-        }
-
-        .system-info {
-            text-align: right;
-            font-size: 0.9em;
-        }
-
-        .system-info strong {
-            color: var(--secondary);
+            width: 100%;
+            max-width: 1200px;
+            margin: 60px auto 20px;
         }
 
         /* Language Selector */
         .language-selector {
-            position: absolute;
-            top: 20px;
+            position: fixed;
+            top: 60px;
             right: 20px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.9);
             padding: 5px;
             border-radius: 5px;
             display: flex;
             gap: 5px;
+            z-index: 1000;
         }
 
         .lang-btn {
             background: none;
             border: none;
-            color: white;
             padding: 5px 10px;
             cursor: pointer;
             border-radius: 3px;
+            font-weight: bold;
         }
 
         .lang-btn.active {
-            background: var(--secondary);
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: var(--primary);
-            padding: 0;
-            margin-top: 10px;
-            border-radius: 3px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-menu li {
-            flex: 1;
-        }
-
-        .nav-link {
+            background: var(--primary);
             color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            display: block;
-            font-weight: bold;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-            font-size: 0.95em;
-            text-align: center;
         }
 
-        .nav-link:hover {
-            background-color: var(--accent);
-            color: var(--secondary);
-        }
-
-        .nav-link.active {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin: 20px 0;
-        }
-
-        .welcome-section {
+        /* Login Container */
+        .login-container {
             background: white;
-            padding: 30px;
-            border-radius: 3px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #DDDDDD;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            min-height: 600px;
         }
 
-        h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 8px;
+        /* Left Side - Bank Info */
+        .bank-info {
+            flex: 1;
+            background: linear-gradient(to bottom right, var(--primary), #002244);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bank-logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bank-logo i {
+            font-size: 4em;
+            color: var(--secondary);
             margin-bottom: 20px;
+        }
+
+        .bank-logo h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .bank-logo .tagline {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+        }
+
+        .bank-features {
+            margin-top: 40px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .feature i {
             font-size: 1.5em;
-            font-weight: bold;
+            color: var(--secondary);
+            margin-right: 15px;
         }
 
-        /* Login Form */
-        .login-form {
-            background: var(--light);
-            padding: 25px;
-            border-radius: 3px;
-            border: 1px solid #DDDDDD;
-            max-width: 500px;
-            margin: 20px auto;
+        /* Right Side - Login Form */
+        .login-form-container {
+            flex: 1;
+            padding: 40px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+        }
+
+        /* Form Styles */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
             color: var(--primary);
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #CCCCCC;
-            border-radius: 3px;
-            font-size: 14px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
 
         input:focus {
             border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 5px rgba(0,102,204,0.3);
+            box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+        }
+
+        /* Barcode Section */
+        .barcode-section {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed var(--primary);
+        }
+
+        .barcode-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
         }
 
         /* Buttons */
@@ -292,21 +280,22 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
+            padding: 12px 25px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
             transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn:hover {
             background: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .btn-secondary {
@@ -319,88 +308,56 @@
             display: block;
         }
 
-        /* Barcode Scanner */
-        .barcode-section {
-            background: white;
-            padding: 25px;
-            border-radius: 3px;
-            margin: 20px 0;
-            border: 1px solid #DDDDDD;
-            text-align: center;
-        }
-
-        #scanner-container {
-            width: 100%;
-            max-width: 500px;
-            height: 300px;
-            margin: 20px auto;
-            border: 3px dashed var(--primary);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        .barcode-input {
-            width: 100%;
-            max-width: 500px;
-            padding: 12px;
-            font-size: 16px;
-            text-align: center;
-            border: 2px solid var(--primary);
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-
         /* Alert */
         .alert {
             padding: 12px;
-            border-radius: 3px;
+            border-radius: 5px;
             margin-bottom: 15px;
             border-left: 4px solid;
         }
 
         .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left-color: var(--danger);
+            background: #fee;
+            color: #c00;
+            border-left-color: #c00;
         }
 
         .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left-color: var(--success);
+            background: #efe;
+            color: #090;
+            border-left-color: #090;
+        }
+
+        /* Scanner Container */
+        .scanner-container {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
         }
 
         /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 3px solid var(--secondary);
-            font-size: 0.9em;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .copyright {
+        .login-footer {
             text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
             padding-top: 20px;
-            color: #999999;
+            border-top: 1px solid #eee;
+        }
+
+        /* Currency Symbol Style */
+        .currency {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #4CAF50;
         }
 
         /* Responsive */
-        @media (max-width: 1000px) {
-            .container {
-                width: 100%;
-                padding: 0 15px;
-            }
-            
+        @media (max-width: 768px) {
             .formulary-banner-content {
                 flex-direction: column;
                 gap: 10px;
@@ -411,26 +368,34 @@
                 text-align: center;
             }
             
-            .nav-menu {
+            .login-container {
                 flex-direction: column;
             }
             
-            .nav-menu li {
-                margin-bottom: 5px;
+            .bank-info {
+                padding: 30px 20px;
+            }
+            
+            .login-form-container {
+                padding: 30px 20px;
+            }
+            
+            .language-selector {
+                top: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- FORMULARY BANNER - ADDED SECTION -->
+    <!-- FORMULARY BANNER -->
     <div class="formulary-banner" id="formularyBanner">
         <div class="formulary-banner-content">
             <div class="formulary-text">
                 <i class="fas fa-file-alt"></i>
-                <span data-i18n="formulary.message">Please complete our customer feedback formulary to help us improve our services</span>
+                <span>Please complete our customer feedback formulary to help us improve our services</span>
             </div>
             <div style="display: flex; align-items: center;">
-                <a href="https://forms.gle/phiT7zpPHLvUJfmq8" target="_blank" class="formulary-btn" data-i18n="formulary.button">
+                <a href="https://forms.gle/phiT7zpPHLvUJfmq8" target="_blank" class="formulary-btn">
                     <i class="fas fa-external-link-alt"></i>
                     Go to Formulary
                 </a>
@@ -441,158 +406,179 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="language-selector">
-                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
-                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-            </div>
-            
-            <div class="header-top">
-                <div class="logo">
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="login-container">
+            <!-- Left Side: Bank Information -->
+            <div class="bank-info">
+                <div class="bank-logo">
                     <i class="fas fa-university"></i>
-                    <div class="logo-text">
-                        <h1 data-i18n="app.title">George Eliot Bank</h1>
-                        <div class="tagline" data-i18n="app.tagline">Secure Banking Solutions Since 2012</div>
+                    <h1>George Eliot Bank</h1>
+                    <div class="tagline">Secure Banking Solutions Since 2012</div>
+                </div>
+
+                <div class="bank-features">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h3>Secure Banking</h3>
+                            <p>Military-grade encryption for all transactions</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-barcode"></i>
+                        <div>
+                            <h3>Barcode Scanner</h3>
+                            <p>Quick login with barcode technology</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h3>Multi-language</h3>
+                            <p>Available in English, Arabic, and French</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>
+                            <h3>Mobile Ready</h3>
+                            <p>Access your account from any device</p>
+                        </div>
                     </div>
                 </div>
-                <div class="system-info">
-                    <div><strong>System:</strong> Online Banking v2.0</div>
-                    <div><strong>Status:</strong> <span style="color: #4CAF50;">Secure</span></div>
-                    <div><i class="fas fa-shield-alt"></i> Barcode Scanner Enabled</div>
-                </div>
-            </div>
-            
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> <span data-i18n="nav.home">Home</span></a></li>
-                    <li><a href="dashboard.html" class="nav-link"><i class="fas fa-dashboard"></i> <span data-i18n="nav.dashboard">Dashboard</span></a></li>
-                    <li><a href="transactions.html" class="nav-link"><i class="fas fa-exchange-alt"></i> <span data-i18n="nav.transactions">Transactions</span></a></li>
-                    <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> <span data-i18n="nav.account">Account</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-        <div class="main-content">
-            <div class="welcome-section">
-                <h2 data-i18n="home.welcome">Welcome to George Eliot Bank</h2>
-                <p data-i18n="home.description">Experience secure banking with our 2012-style business platform. Access your account using barcode scanning or manual entry.</p>
-                
-                <div class="alert" style="background: #d1ecf1; color: #0c5460; border-left-color: var(--accent);">
-                    <i class="fas fa-info-circle"></i> 
-                    <span data-i18n="home.info">This system uses separate file storage and supports barcode scanning for quick account access.</span>
-                </div>
             </div>
 
-            <div class="barcode-section">
-                <h3 data-i18n="login.scan_title">Quick Login with Barcode</h3>
-                <div id="scanner-container"></div>
-                <div style="margin: 20px 0;">
-                    <button class="btn btn-secondary" onclick="startScanner()" id="start-scanner">
-                        <i class="fas fa-camera"></i> <span data-i18n="login.start_scan">Start Barcode Scanner</span>
-                    </button>
-                    <button class="btn" onclick="stopScanner()" id="stop-scanner" style="display: none;">
-                        <i class="fas fa-stop"></i> <span data-i18n="login.stop_scan">Stop Scanner</span>
-                    </button>
+            <!-- Right Side: Login Form -->
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h2>Account Login</h2>
+                    <p>Secure access to your banking dashboard</p>
                 </div>
-                <p data-i18n="login.or_manual">- OR -</p>
-                <input type="text" class="barcode-input" id="manual-barcode" placeholder="Enter barcode or account ID manually" data-i18n-placeholder="login.barcode_placeholder">
-            </div>
 
-            <div class="login-form">
-                <h3 data-i18n="login.title">Account Login</h3>
+                <!-- Login Message -->
                 <div id="login-message"></div>
-                
-                <div class="form-group">
-                    <label for="account-id" data-i18n="login.account_id">Account ID</label>
-                    <input type="text" id="account-id" placeholder="Enter 16-digit account ID" maxlength="16">
+
+                <!-- Barcode Scanner Section -->
+                <div class="barcode-section">
+                    <h3>Quick Login with Barcode</h3>
+                    <div class="scanner-container" id="scanner-container">
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                            <i class="fas fa-camera" style="font-size: 3em; color: #999;"></i>
+                        </div>
+                    </div>
+                    <div style="margin: 15px 0;">
+                        <button class="btn btn-secondary" onclick="startScanner()" id="start-scanner">
+                            <i class="fas fa-camera"></i> Start Barcode Scanner
+                        </button>
+                        <button class="btn" onclick="stopScanner()" id="stop-scanner" style="display: none;">
+                            <i class="fas fa-stop"></i> Stop Scanner
+                        </button>
+                    </div>
+                    <p>- OR -</p>
+                    <input type="text" class="barcode-input" id="manual-barcode" 
+                           placeholder="Enter barcode (e.g., 5673 9183 4624 3120)">
                 </div>
-                
-                <div class="form-group">
-                    <label for="pin" data-i18n="login.pin">PIN Code</label>
-                    <input type="password" id="pin" placeholder="Enter your PIN">
+
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="event.preventDefault(); loginAccount();">
+                    <div class="form-group">
+                        <label for="account-id">Account ID</label>
+                        <input type="text" id="account-id" 
+                               placeholder="Enter 16-digit account ID" 
+                               maxlength="16"
+                               required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pin">PIN Code</label>
+                        <input type="password" id="pin" 
+                               placeholder="Enter your PIN" 
+                               required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">
+                        <i class="fas fa-sign-in-alt"></i> 
+                        Login to Account
+                    </button>
+                </form>
+
+                <!-- Demo Accounts Hint -->
+                <div class="login-footer">
+                    <p><strong>Demo Accounts:</strong> Use barcode or account ID with PIN</p>
+                    <p>Barcode: <code>5673 9183 4624 3120</code> | PIN: <code>6458</code></p>
+                    <p>Barcode: <code>3586 0058 0234 4415</code> | PIN: <code>2003</code></p>
                 </div>
-                
-                <button class="btn btn-block" onclick="loginAccount()">
-                    <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.login_button">Login to Account</span>
-                </button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3 style="color: var(--secondary); margin-bottom: 10px;">George Eliot Bank</h3>
-                    <p data-i18n="footer.address">123 Banking Street, Financial District</p>
-                    <p data-i18n="footer.phone">Phone: 1-800-BANK-GEB</p>
-                </div>
-                <div>
-                    <h3 style="color: var(--secondary); margin-bottom: 10px;" data-i18n="footer.hours">Business Hours</h3>
-                    <p data-i18n="footer.weekdays">Mon-Fri: 9:00 AM - 6:00 PM</p>
-                    <p data-i18n="footer.saturday">Saturday: 10:00 AM - 2:00 PM</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p data-i18n="footer.copyright">© 2012-2023 George Eliot Bank. All rights reserved.</p>
-                <p data-i18n="footer.security">Secure Banking System | Barcode Scanner Enabled</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript Files -->
+    <!-- JavaScript -->
     <script src="translations.js"></script>
-    <script src="database.js"></script>
     <script src="scanner.js"></script>
     <script>
-        // Load translations
-        loadTranslations();
+        let bankDatabase = null;
         
-        // FORMULARY BANNER FUNCTIONS - ADDED
+        // Load database on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDatabase();
+            initBarcodeScanner();
+            
+            // Check if already logged in
+            const currentAccount = sessionStorage.getItem('currentAccount');
+            if (currentAccount) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+        
+        // Load database from JSON
+        async function loadDatabase() {
+            try {
+                const response = await fetch('database.json');
+                bankDatabase = await response.json();
+                console.log('Database loaded successfully');
+            } catch (error) {
+                console.error('Error loading database:', error);
+                showAlert('Error loading database. Please try again later.', 'error', 
+                          document.getElementById('login-message'));
+            }
+        }
+        
+        // Formulary banner functions
         function closeBanner() {
             const banner = document.getElementById('formularyBanner');
             banner.style.display = 'none';
-            // Store in localStorage to remember user's preference
             localStorage.setItem('formularyBannerClosed', 'true');
         }
         
-        // Check if user previously closed the banner
-        document.addEventListener('DOMContentLoaded', function() {
-            const bannerClosed = localStorage.getItem('formularyBannerClosed');
-            if (bannerClosed === 'true') {
-                document.getElementById('formularyBanner').style.display = 'none';
-            }
-            
-            // Auto-close banner after 30 seconds
-            setTimeout(function() {
-                const banner = document.getElementById('formularyBanner');
-                if (banner.style.display !== 'none') {
-                    banner.style.opacity = '0.9';
-                }
-            }, 30000);
-        });
-        
-        // Open formulary in new tab
-        function openFormulary() {
-            window.open('https://forms.gle/phiT7zpPHLvUJfmq8', '_blank');
+        // Check if banner was previously closed
+        if (localStorage.getItem('formularyBannerClosed') === 'true') {
+            document.getElementById('formularyBanner').style.display = 'none';
         }
         
         // Login function
         function loginAccount() {
+            if (!bankDatabase) {
+                showAlert('Database not loaded. Please refresh the page.', 'error', 
+                          document.getElementById('login-message'));
+                return;
+            }
+            
             let accountId = document.getElementById('account-id').value.trim();
             const pin = document.getElementById('pin').value.trim();
             const messageDiv = document.getElementById('login-message');
             
-            // Clean account ID
+            // Clean account ID (remove spaces)
             accountId = accountId.replace(/\s+/g, '');
             
+            // Validate account ID
             if (!accountId || accountId.length !== 16) {
                 showAlert('Please enter a valid 16-digit Account ID', 'error', messageDiv);
                 return;
@@ -603,28 +589,31 @@
                 return;
             }
             
-            const account = BankDatabase.getAccount(accountId);
+            // Get account from database
+            const account = bankDatabase.accounts[accountId];
             
             if (!account) {
                 showAlert('Account not found. Please check your Account ID.', 'error', messageDiv);
                 return;
             }
             
-            // Check PIN (case-sensitive for special PINs)
+            // Check PIN (case-sensitive)
             if (account.pin !== pin) {
                 showAlert('Invalid PIN. Please try again.', 'error', messageDiv);
                 return;
             }
             
-            // Update last login
-            BankDatabase.updateLastLogin(accountId);
-            
             // Store account in session
             sessionStorage.setItem('currentAccount', accountId);
             sessionStorage.setItem('accountName', account.name);
             
-            // Redirect to dashboard
-            window.location.href = 'dashboard.html';
+            // Show success message
+            showAlert('Login successful! Redirecting to dashboard...', 'success', messageDiv);
+            
+            // Redirect to dashboard after 1 second
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
         }
         
         // Alert function
@@ -643,12 +632,29 @@
         // Auto-fill from barcode input
         document.getElementById('manual-barcode').addEventListener('input', function(e) {
             const value = this.value.trim();
-            // If it looks like an account ID, fill the account field
-            if (value.length === 16 && /^\d+$/.test(value)) {
-                document.getElementById('account-id').value = value;
+            
+            // Check if barcode exists in database
+            if (bankDatabase && bankDatabase.barcodes[value]) {
+                const accountId = bankDatabase.barcodes[value];
+                document.getElementById('account-id').value = accountId;
                 document.getElementById('pin').focus();
+                
+                // Show success message
+                const messageDiv = document.getElementById('login-message');
+                showAlert('Barcode recognized! Account ID filled automatically.', 'success', messageDiv);
             }
         });
+        
+        // Format currency with Ǥ symbol
+        function formatCurrency(amount) {
+            return `Ǥ${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+        
+        // Format account ID with spaces
+        function formatAccountId(accountId) {
+            if (!accountId) return '';
+            return accountId.match(/.{1,4}/g).join(' ');
+        }
         
         // Set language
         function setLanguage(lang) {
@@ -659,8 +665,9 @@
             }
         }
         
-        // Initialize scanner
-        initBarcodeScanner();
+        // Make functions available globally
+        window.formatCurrency = formatCurrency;
+        window.formatAccountId = formatAccountId;
     </script>
 </body>
 </html>
