@@ -6,10 +6,11 @@
     <title>Transactions - George Eliot Bank</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reuse styles from dashboard with some modifications */
+        /* Reuse dashboard styles */
         :root {
             --primary: #003366;
             --secondary: #FFCC00;
+            --accent: #0066CC;
             --light: #F5F5F5;
             --dark: #333333;
         }
@@ -18,33 +19,37 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            min-height: 100vh;
+            background-color: #f0f0f0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header - Same as dashboard */
+        header {
+            background: linear-gradient(to bottom, var(--primary), #002244);
+            color: white;
+            padding: 15px 0;
+            border-bottom: 3px solid var(--secondary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header - Same as dashboard */
-        header {
-            background: linear-gradient(to right, var(--primary), #002244);
-            color: white;
-            padding: 20px 0;
-            border-bottom: 3px solid var(--secondary);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header-content {
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
 
         .logo {
@@ -54,95 +59,129 @@
         }
 
         .logo i {
-            font-size: 2em;
+            font-size: 2.5em;
             color: var(--secondary);
         }
 
-        .logo-text h1 {
-            font-size: 1.5em;
+        .logo h1 {
+            font-size: 1.8em;
             font-weight: bold;
+        }
+
+        .logo p {
+            font-size: 0.9em;
+            opacity: 0.9;
         }
 
         .user-info {
             text-align: right;
         }
 
-        .logout-btn {
-            background: var(--secondary);
-            color: var(--primary);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 5px;
+        .welcome-message {
+            font-size: 1.1em;
+            margin-bottom: 5px;
         }
 
         /* Navigation */
         nav {
-            background: white;
-            margin: 20px 0;
+            background-color: var(--primary);
+            margin-top: 15px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
-        .nav-links {
+        .nav-menu {
             display: flex;
             list-style: none;
         }
 
+        .nav-menu li {
+            flex: 1;
+        }
+
         .nav-link {
-            padding: 15px 25px;
+            color: white;
             text-decoration: none;
-            color: var(--primary);
+            padding: 15px 20px;
+            display: block;
             font-weight: bold;
-            border-right: 1px solid #eee;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
             transition: all 0.3s;
         }
 
         .nav-link:hover {
-            background: #f8f9fa;
+            background-color: var(--accent);
+            color: var(--secondary);
         }
 
         .nav-link.active {
-            background: var(--primary);
-            color: white;
+            background-color: var(--secondary);
+            color: var(--primary);
         }
 
-        /* Transactions Content */
-        .transactions-content {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        /* Main Content */
+        .main-content {
+            padding: 30px 0;
         }
 
-        .transactions-header {
+        .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
         }
 
-        .transactions-header h2 {
+        .page-title {
             color: var(--primary);
-            font-size: 1.8em;
+            font-size: 2em;
         }
 
-        .back-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
+        /* Transaction Filters */
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             align-items: center;
-            gap: 10px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        select, input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* Transactions Table */
+        .transactions-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
         .transactions-table {
@@ -156,21 +195,24 @@
             padding: 15px;
             text-align: left;
             font-weight: bold;
+            position: sticky;
+            top: 0;
         }
 
         .transactions-table td {
-            padding: 12px 15px;
+            padding: 15px;
             border-bottom: 1px solid #eee;
         }
 
         .transactions-table tr:hover {
-            background: #f8f9fa;
+            background: #f9f9f9;
         }
 
         .transaction-type {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
             font-weight: bold;
         }
 
@@ -189,14 +231,149 @@
             color: #0c5460;
         }
 
+        .transaction-positive {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .transaction-negative {
+            color: #F44336;
+            font-weight: bold;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Export Section */
+        .export-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-logout {
+            background: #dc3545;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
         /* Footer */
         footer {
             background: var(--primary);
             color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+            padding: 30px 0;
+            margin-top: 50px;
             border-top: 3px solid var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .transactions-table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
@@ -204,47 +381,90 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="header-content">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+            </div>
+            
+            <div class="header-top">
                 <div class="logo">
                     <i class="fas fa-university"></i>
-                    <div class="logo-text">
+                    <div>
                         <h1>George Eliot Bank</h1>
                         <p>Transaction History</p>
                     </div>
                 </div>
-                
                 <div class="user-info">
-                    <div id="welcome-message">Welcome, User</div>
-                    <button class="logout-btn" onclick="logout()">
+                    <div class="welcome-message" id="welcome-user">Welcome, User</div>
+                    <a href="index.html" class="btn btn-logout">
                         <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
+                    </a>
                 </div>
             </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="dashboard.html" class="nav-link"><i class="fas fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="transactions.html" class="nav-link active"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                    <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> Account</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <ul class="nav-links">
-                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="transactions.html" class="nav-link active"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
-                <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> Account</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Main Content -->
     <main class="container">
-        <div class="transactions-content">
-            <div class="transactions-header">
-                <h2>All Transactions</h2>
-                <button class="back-btn" onclick="goBack()">
-                    <i class="fas fa-arrow-left"></i> Back to Dashboard
-                </button>
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Transaction History</h1>
+                <div>
+                    <strong>Current Balance:</strong> 
+                    <span id="current-balance" style="font-size: 1.2em; font-weight: bold; color: var(--primary);">$0.00</span>
+                </div>
             </div>
-            
-            <div id="transactions-list">
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label">Date Range</label>
+                    <select id="date-range">
+                        <option value="all">All Time</option>
+                        <option value="30">Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="365">Last Year</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Transaction Type</label>
+                    <select id="transaction-type">
+                        <option value="all">All Types</option>
+                        <option value="DEPOSIT">Deposits</option>
+                        <option value="WITHDRAWAL">Withdrawals</option>
+                        <option value="TRANSFER">Transfers</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Search Description</label>
+                    <input type="text" id="search-input" placeholder="Search transactions...">
+                </div>
+                
+                <div style="display: flex; align-items: flex-end;">
+                    <button class="btn" onclick="applyFilters()">
+                        <i class="fas fa-filter"></i> Apply Filters
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetFilters()" style="margin-left: 10px;">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="transactions-container">
                 <table class="transactions-table">
                     <thead>
                         <tr>
@@ -256,9 +476,23 @@
                         </tr>
                     </thead>
                     <tbody id="transactions-body">
-                        <!-- Transactions loaded by JavaScript -->
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 40px;">
+                                <i class="fas fa-spinner fa-spin"></i> Loading transactions...
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Export Section -->
+            <div class="export-section">
+                <button class="btn" onclick="exportToCSV()">
+                    <i class="fas fa-download"></i> Export to CSV
+                </button>
+                <button class="btn btn-secondary" onclick="printTransactions()" style="margin-left: 10px;">
+                    <i class="fas fa-print"></i> Print Statement
+                </button>
             </div>
         </div>
     </main>
@@ -266,107 +500,159 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2023 George Eliot Bank. All rights reserved.</p>
-            <p>Secure Banking System | Complete Transaction History</p>
+            <div class="copyright">
+                <p>© 2012-2024 George Eliot Bank. All rights reserved.</p>
+                <p>Secure Banking System | Barcode Scanner Enabled</p>
+            </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
+    <script src="database.js"></script>
     <script>
         // Check if user is logged in
         const currentAccount = sessionStorage.getItem('currentAccount');
         if (!currentAccount) {
             window.location.href = 'index.html';
         }
-        
-        // Account Data
-        const accountData = {
-            '5673918346243120': {
-                name: 'Noah Perso',
-                transactions: [
-                    { date: '2023-12-28', description: 'Salary Deposit', type: 'DEPOSIT', amount: 3200.00, balance: 12500.75 },
-                    { date: '2023-12-27', description: 'Rent Payment', type: 'WITHDRAWAL', amount: -1500.00, balance: 9300.75 },
-                    { date: '2023-12-25', description: 'Online Shopping', type: 'WITHDRAWAL', amount: -250.00, balance: 10800.75 },
-                    { date: '2023-12-22', description: 'Bank Transfer', type: 'TRANSFER', amount: 500.00, balance: 11050.75 },
-                    { date: '2023-12-20', description: 'ATM Withdrawal', type: 'WITHDRAWAL', amount: -200.00, balance: 10550.75 },
-                    { date: '2023-12-18', description: 'Grocery Store', type: 'WITHDRAWAL', amount: -85.50, balance: 10750.75 }
-                ]
-            },
-            '3586005802344415': {
-                name: 'Laaroussi',
-                transactions: [
-                    { date: '2023-12-27', description: 'Interest Earned', type: 'DEPOSIT', amount: 25.50, balance: 8250.50 },
-                    { date: '2023-12-24', description: 'Transfer to Checking', type: 'TRANSFER', amount: -1000.00, balance: 8225.00 },
-                    { date: '2023-12-20', description: 'Deposit', type: 'DEPOSIT', amount: 500.00, balance: 9225.00 },
-                    { date: '2023-12-17', description: 'Online Payment', type: 'WITHDRAWAL', amount: -75.00, balance: 8725.00 }
-                ]
-            },
-            '0753245061559459': {
-                name: 'nour18',
-                transactions: [
-                    { date: '2023-12-26', description: 'ATM Withdrawal', type: 'WITHDRAWAL', amount: -200.00, balance: 3400.25 },
-                    { date: '2023-12-23', description: 'Online Purchase', type: 'WITHDRAWAL', amount: -89.99, balance: 3600.25 },
-                    { date: '2023-12-20', description: 'Part-time Job', type: 'DEPOSIT', amount: 450.00, balance: 3690.24 },
-                    { date: '2023-12-17', description: 'Coffee Shop', type: 'WITHDRAWAL', amount: -15.00, balance: 3240.24 }
-                ]
-            },
-            '4132993413947692': {
-                name: 'Skibidi',
-                transactions: [
-                    { date: '2023-12-28', description: 'Business Revenue', type: 'DEPOSIT', amount: 450.00, balance: 18750.00 },
-                    { date: '2023-12-24', description: 'Charity Donation', type: 'WITHDRAWAL', amount: -500.00, balance: 18300.00 },
-                    { date: '2023-12-21', description: 'Equipment Purchase', type: 'WITHDRAWAL', amount: -1200.00, balance: 18800.00 },
-                    { date: '2023-12-18', description: 'Client Payment', type: 'DEPOSIT', amount: 2500.00, balance: 20000.00 }
-                ]
-            }
-        };
-        
+
+        let allTransactions = [];
+        let filteredTransactions = [];
+
         // Load transactions
         function loadTransactions() {
-            if (!currentAccount || !accountData[currentAccount]) {
-                logout();
+            const account = BankDatabase.getAccount(currentAccount);
+            if (!account) {
+                window.location.href = 'index.html';
                 return;
             }
-            
-            const account = accountData[currentAccount];
-            
-            // Update welcome message
-            document.getElementById('welcome-message').textContent = `Welcome, ${account.name}`;
-            
-            // Load all transactions
+
+            // Update user welcome
+            document.getElementById('welcome-user').textContent = `Welcome, ${account.name}`;
+            document.getElementById('current-balance').textContent = BankDatabase.formatCurrency(account.balance);
+
+            // Store all transactions
+            allTransactions = account.transactions || [];
+            filteredTransactions = [...allTransactions];
+
+            // Display transactions
+            displayTransactions();
+        }
+
+        // Display transactions
+        function displayTransactions() {
             const tbody = document.getElementById('transactions-body');
-            if (account.transactions && account.transactions.length > 0) {
-                tbody.innerHTML = account.transactions.map(t => `
+            
+            if (filteredTransactions.length === 0) {
+                tbody.innerHTML = `
                     <tr>
-                        <td>${t.date}</td>
-                        <td>${t.description}</td>
-                        <td>
-                            <span class="transaction-type type-${t.type.toLowerCase()}">
-                                ${t.type}
-                            </span>
+                        <td colspan="5" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-info-circle"></i> No transactions found
                         </td>
-                        <td style="color: ${t.amount > 0 ? 'green' : 'red'}; font-weight: bold;">
-                            ${t.amount > 0 ? '+' : ''}$${Math.abs(t.amount).toFixed(2)}
-                        </td>
-                        <td>$${t.balance.toFixed(2)}</td>
                     </tr>
-                `).join('');
-            } else {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No transactions found</td></tr>';
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filteredTransactions.map(transaction => `
+                <tr>
+                    <td>${transaction.date}</td>
+                    <td>${transaction.description}</td>
+                    <td>
+                        <span class="transaction-type type-${transaction.type.toLowerCase()}">
+                            ${transaction.type}
+                        </span>
+                    </td>
+                    <td class="${transaction.amount >= 0 ? 'transaction-positive' : 'transaction-negative'}">
+                        ${transaction.amount >= 0 ? '+' : ''}${BankDatabase.formatCurrency(transaction.amount)}
+                    </td>
+                    <td>${BankDatabase.formatCurrency(transaction.balance)}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const dateRange = document.getElementById('date-range').value;
+            const typeFilter = document.getElementById('transaction-type').value;
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+
+            filteredTransactions = allTransactions.filter(transaction => {
+                // Date filter
+                if (dateRange !== 'all') {
+                    const transactionDate = new Date(transaction.date);
+                    const daysAgo = parseInt(dateRange);
+                    const cutoffDate = new Date();
+                    cutoffDate.setDate(cutoffDate.getDate() - daysAgo);
+                    
+                    if (transactionDate < cutoffDate) {
+                        return false;
+                    }
+                }
+
+                // Type filter
+                if (typeFilter !== 'all' && transaction.type !== typeFilter) {
+                    return false;
+                }
+
+                // Search filter
+                if (searchText && !transaction.description.toLowerCase().includes(searchText)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            displayTransactions();
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('date-range').value = 'all';
+            document.getElementById('transaction-type').value = 'all';
+            document.getElementById('search-input').value = '';
+            filteredTransactions = [...allTransactions];
+            displayTransactions();
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            if (filteredTransactions.length === 0) {
+                alert('No transactions to export.');
+                return;
+            }
+
+            let csvContent = "Date,Description,Type,Amount,Balance\n";
+            filteredTransactions.forEach(transaction => {
+                csvContent += `${transaction.date},${transaction.description},${transaction.type},${transaction.amount},${transaction.balance}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `transactions_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            alert('Transactions exported successfully!');
+        }
+
+        // Print transactions
+        function printTransactions() {
+            window.print();
+        }
+
+        // Set language
+        function setLanguage(lang) {
+            if (window.setLanguage) {
+                window.setLanguage(lang);
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
             }
         }
-        
-        // Helper functions
-        function goBack() {
-            window.location.href = 'dashboard.html';
-        }
-        
-        function logout() {
-            sessionStorage.removeItem('currentAccount');
-            window.location.href = 'index.html';
-        }
-        
-        // Initialize
+
+        // Initialize on load
         window.onload = loadTransactions;
     </script>
 </body>
