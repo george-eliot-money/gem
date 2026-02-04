@@ -112,11 +112,8 @@ function stopScanner() {
 function simulateBarcodeDetection(video) {
     if (!scannerActive) return;
     
-    // For demo, pick a random barcode
-    const barcodes = Object.values(BankDatabase.BARCODES);
-    const randomBarcode = barcodes[Math.floor(Math.random() * barcodes.length)];
-    
-    // Show detection overlay
+    // For demo, pick the first barcode from the database
+    // In a real app, you'd use a barcode scanning library
     const scannerContainer = document.getElementById('scanner-container');
     const detectionOverlay = document.createElement('div');
     detectionOverlay.style.position = 'absolute';
@@ -135,8 +132,8 @@ function simulateBarcodeDetection(video) {
     
     detectionOverlay.innerHTML = `
         <i class="fas fa-check-circle" style="font-size: 4em; color: #4CAF50; margin-bottom: 20px;"></i>
-        <h2 style="margin-bottom: 10px;">Barcode Detected!</h2>
-        <p style="font-size: 1.2em; margin-bottom: 20px;">Code: <strong>${randomBarcode}</strong></p>
+        <h2 style="margin-bottom: 10px;">Barcode Scanned!</h2>
+        <p style="font-size: 1.2em; margin-bottom: 20px;">Demo barcode detected</p>
         <div class="spinner" style="margin: 20px 0;"></div>
         <p>Auto-filling account information...</p>
     `;
@@ -147,23 +144,13 @@ function simulateBarcodeDetection(video) {
     setTimeout(() => {
         if (!scannerActive) return;
         
-        // Get account ID from barcode
-        const accountId = BankDatabase.getAccountByBarcode(randomBarcode);
-        if (accountId) {
-            document.getElementById('manual-barcode').value = randomBarcode;
-            document.getElementById('account-id').value = accountId;
-            document.getElementById('pin').focus();
-            
-            // Show success message
-            const messageDiv = document.getElementById('login-message');
-            if (messageDiv) {
-                messageDiv.innerHTML = `
-                    <div class="alert alert-success">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Barcode scanned successfully! Account ID filled automatically.</span>
-                    </div>
-                `;
-            }
+        // For demo, use the first account
+        // In real app, this would come from actual barcode scanning
+        const manualBarcodeInput = document.getElementById('manual-barcode');
+        if (manualBarcodeInput) {
+            // Simulate entering a barcode
+            manualBarcodeInput.value = "5673 9183 4624 3120";
+            manualBarcodeInput.dispatchEvent(new Event('input'));
         }
         
         // Stop scanner
