@@ -1,9 +1,6 @@
-// ==============================================
-// GEORGE ELIOT BANK - DATABASE
-// ==============================================
-
+// GEORGE ELIOT BANK DATABASE
 const BankDatabase = {
-    // Accounts Database
+    // Accounts database
     ACCOUNTS: {
         '5673918346243120': {
             name: 'Noah Perso',
@@ -11,12 +8,11 @@ const BankDatabase = {
             balance: 2000.00,
             accountNumber: '3120',
             pin: '6458',
-            email: 'noahbernocco@gmail.com',
-            phone: '+212 665-937383',
-            address: 'not saying it',
+            email: 'bicth',
+            phone: 'kakala',
+            address: 'my eyes only',
             transactions: [
-                { null },
-               
+                { null }
             ],
             lastLogin: null
         },
@@ -26,9 +22,9 @@ const BankDatabase = {
             balance: 2000.00,
             accountNumber: '4415',
             pin: '2003',
-            email: 'noting ...',
-            phone: 'didnt remember',
-            address: 'IDK',
+            email: 'laaroussi@georgeeliotbank.com',
+            phone: 'son iPhone 14 couleur bleu napoleon importer du canada par son grand frère qui fait ses étude là-bas',
+            address: 'Had soualem / les villas',
             transactions: [
                 { null }
             ],
@@ -40,9 +36,9 @@ const BankDatabase = {
             balance: 5000.00,
             accountNumber: '9459',
             pin: '2011',
-            email: 'sorry',
-            phone: 'i want to swear on all of the acounts',
-            address: ' le transport ',
+            email: 'l'ordi de sa sœur',
+            phone: 'son telephone',
+            address: 'le transport',
             transactions: [
                 { null }
             ],
@@ -54,8 +50,8 @@ const BankDatabase = {
             balance: 0.00,
             accountNumber: '7692',
             pin: 'FVNE SHYT',
-            email: ' BITCH SHAKALAKA',
-            phone: ' YES GOD',
+            email: 'sirine im ngl i wanna swear on every single account',
+            phone: 'YES GOD ',
             address: 'YES GOD',
             transactions: [
                 { null }
@@ -64,17 +60,17 @@ const BankDatabase = {
         }
     },
 
-    // Barcode Mappings
+    // Barcode mappings
     BARCODES: {
-        '5673918346243120': '5673 9183 4624 3120',
-        '3586005802344415': '3586 0058 0234 4415',
-        '0753245061559459': '0753 2450 6155 9459',
-        '4132993413947692': '4132 9934 1394 7692'
+        '5673918346243120': 'GEB001',
+        '3586005802344415': 'GEB002', 
+        '0753245061559459': 'GEB003',
+        '4132993413947692': 'GEB004'
     },
 
-    // Helper Functions
+    // Helper methods
     getAccount: function(accountId) {
-        return this.ACCOUNTS[accountId];
+        return this.ACCOUNTS[accountId] || null;
     },
 
     getAccountByBarcode: function(barcode) {
@@ -87,28 +83,51 @@ const BankDatabase = {
     },
 
     updateLastLogin: function(accountId) {
-        if (this.ACCOUNTS[accountId]) {
-            this.ACCOUNTS[accountId].lastLogin = new Date().toLocaleString();
+        const account = this.getAccount(accountId);
+        if (account) {
+            account.lastLogin = new Date().toLocaleString();
             return true;
         }
         return false;
     },
 
     formatCurrency: function(amount) {
-        return '$' + amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(amount);
     },
 
     formatAccountId: function(accountId) {
         if (!accountId) return '';
-        return accountId.replace(/(\d{4})(?=\d)/g, '$1 ');
+        return accountId.match(/.{1,4}/g).join(' ');
     },
 
     getAllAccounts: function() {
         return this.ACCOUNTS;
+    },
+
+    // Transaction methods
+    addTransaction: function(accountId, description, type, amount) {
+        const account = this.getAccount(accountId);
+        if (!account) return false;
+
+        const newBalance = account.balance + amount;
+        account.balance = newBalance;
+        
+        account.transactions.unshift({
+            date: new Date().toISOString().split('T')[0],
+            description: description,
+            type: type,
+            amount: amount,
+            balance: newBalance
+        });
+        
+        return true;
     }
 };
 
-// Export for browser
+// Make it globally available
 if (typeof window !== 'undefined') {
     window.BankDatabase = BankDatabase;
 }
