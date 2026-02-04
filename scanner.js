@@ -1,8 +1,6 @@
-// ==============================================
-// GEORGE ELIOT BANK - BARCODE SCANNER
-// ==============================================
-
+// BARCODE SCANNER FUNCTIONALITY
 let scannerActive = false;
+let videoStream = null;
 
 function initBarcodeScanner() {
     console.log('Barcode scanner initialized');
@@ -33,11 +31,14 @@ function startScanner() {
     })
     .then(function(stream) {
         scannerActive = true;
+        videoStream = stream;
+        
         const video = document.createElement('video');
         video.srcObject = stream;
-        video.setAttribute('playsinline', true); // Required for iOS
+        video.setAttribute('playsinline', true);
         video.style.width = '100%';
         video.style.height = '100%';
+        video.style.objectFit = 'cover';
         
         // Clear container and add video
         scannerContainer.innerHTML = '';
@@ -50,29 +51,56 @@ function startScanner() {
         document.getElementById('start-scanner').style.display = 'none';
         document.getElementById('stop-scanner').style.display = 'inline-block';
         
-        // For demo purposes, we'll simulate barcode scanning
-        // In a real app, you would use a barcode scanning library like Quagga.js
-        simulateBarcodeDetection(video);
+        // Add scanning overlay
+        const overlay = document.createElement('div');
+        overlay.style.position = 'absolute';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.border = '3px solid var(--secondary)';
+        overlay.style.boxSizing = 'border-box';
+        scannerContainer.appendChild(overlay);
         
-        console.log('Camera started successfully');
+        // Add scanning text
+        const scanningText = document.createElement('div');
+        scanningText.style.position = 'absolute';
+        scanningText.style.bottom = '10px';
+        scanningText.style.left = '0';
+        scanningText.style.width = '100%';
+        scanningText.style.textAlign = 'center';
+        scanningText.style.color = 'white';
+        scanningText.style.background = 'rgba(0,0,0,0.7)';
+        scanningText.style.padding = '10px';
+        scanningText.innerHTML = '<i class="fas fa-search"></i> Point camera at barcode';
+        scannerContainer.appendChild(scanningText);
+        
+        // For demo purposes, simulate barcode detection
+        setTimeout(() => {
+            if (!scannerActive) return;
+            simulateBarcodeDetection(video);
+        }, 2000);
+        
     })
     .catch(function(error) {
         console.error('Camera error:', error);
-        alert('Unable to access camera: ' + error.message + '\n\nPlease allow camera permissions and try again.');
+        alert('Unable to access camera. Please make sure you have granted camera permissions.');
     });
 }
 
 function stopScanner() {
     if (!scannerActive) return;
     
+    // Stop video stream
+    if (videoStream) {
+        const tracks = videoStream.getTracks();
+        tracks.forEach(track => track.stop());
+        videoStream = null;
+    }
+    
+    // Reset UI
     const scannerContainer = document.getElementById('scanner-container');
     if (scannerContainer) {
-        const video = scannerContainer.querySelector('video');
-        if (video && video.srcObject) {
-            const stream = video.srcObject;
-            const tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-        }
         scannerContainer.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-camera" style="font-size: 3em; color: #999;"></i></div>';
     }
     
@@ -82,72 +110,74 @@ function stopScanner() {
 }
 
 function simulateBarcodeDetection(video) {
-    // This is a simulation - in real app, use a barcode library
-    // We'll simulate finding a barcode after 3 seconds for demo
+    if (!scannerActive) return;
     
+    // For demo, pick a random barcode
+    const barcodes = Object.values(BankDatabase.BARCODES);
+    const randomBarcode = barcodes[Math.floor(Math.random() * barcodes.length)];
+    
+    // Show detection overlay
+    const scannerContainer = document.getElementById('scanner-container');
+    const detectionOverlay = document.createElement('div');
+    detectionOverlay.style.position = 'absolute';
+    detectionOverlay.style.top = '0';
+    detectionOverlay.style.left = '0';
+    detectionOverlay.style.width = '100%';
+    detectionOverlay.style.height = '100%';
+    detectionOverlay.style.background = 'rgba(0, 51, 102, 0.8)';
+    detectionOverlay.style.display = 'flex';
+    detectionOverlay.style.flexDirection = 'column';
+    detectionOverlay.style.alignItems = 'center';
+    detectionOverlay.style.justifyContent = 'center';
+    detectionOverlay.style.color = 'white';
+    detectionOverlay.style.textAlign = 'center';
+    detectionOverlay.style.padding = '20px';
+    
+    detectionOverlay.innerHTML = `
+        <i class="fas fa-check-circle" style="font-size: 4em; color: #4CAF50; margin-bottom: 20px;"></i>
+        <h2 style="margin-bottom: 10px;">Barcode Detected!</h2>
+        <p style="font-size: 1.2em; margin-bottom: 20px;">Code: <strong>${randomBarcode}</strong></p>
+        <div class="spinner" style="margin: 20px 0;"></div>
+        <p>Auto-filling account information...</p>
+    `;
+    
+    scannerContainer.appendChild(detectionOverlay);
+    
+    // Auto-fill after delay
     setTimeout(() => {
         if (!scannerActive) return;
         
-        // For demo, randomly pick a barcode from database
-        const barcodes = Object.values(BankDatabase.BARCODES);
-        const randomBarcode = barcodes[Math.floor(Math.random() * barcodes.length)];
-        
-        // Display detected barcode
-        const barcodeDiv = document.createElement('div');
-        barcodeDiv.style.position = 'absolute';
-        barcodeDiv.style.top = '50%';
-        barcodeDiv.style.left = '50%';
-        barcodeDiv.style.transform = 'translate(-50%, -50%)';
-        barcodeDiv.style.background = 'rgba(0, 51, 102, 0.9)';
-        barcodeDiv.style.color = 'white';
-        barcodeDiv.style.padding = '20px';
-        barcodeDiv.style.borderRadius = '5px';
-        barcodeDiv.style.textAlign = 'center';
-        barcodeDiv.style.border = '3px solid #FFCC00';
-        barcodeDiv.innerHTML = `
-            <i class="fas fa-check-circle" style="font-size: 2em; margin-bottom: 10px;"></i><br>
-            <strong>Barcode Detected!</strong><br>
-            Code: ${randomBarcode}<br>
-            <small>Auto-filling account information...</small>
-        `;
-        
-        // Add to scanner container
-        const container = document.getElementById('scanner-container');
-        container.appendChild(barcodeDiv);
-        
-        // Auto-fill the form after 2 seconds
-        setTimeout(() => {
-            if (!scannerActive) return;
+        // Get account ID from barcode
+        const accountId = BankDatabase.getAccountByBarcode(randomBarcode);
+        if (accountId) {
+            document.getElementById('manual-barcode').value = randomBarcode;
+            document.getElementById('account-id').value = accountId;
+            document.getElementById('pin').focus();
             
-            // Get account ID from barcode
-            const accountId = BankDatabase.getAccountByBarcode(randomBarcode);
-            if (accountId) {
-                document.getElementById('manual-barcode').value = randomBarcode;
-                document.getElementById('account-id').value = accountId;
-                document.getElementById('pin').focus();
-                
-                // Show success message
-                const loginMessage = document.getElementById('login-message');
-                if (loginMessage) {
-                    loginMessage.innerHTML = `
-                        <div class="alert" style="background: #d4edda; color: #155724; border-left-color: #28a745;">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Barcode scanned successfully! Account ID filled automatically.</span>
-                        </div>
-                    `;
-                }
+            // Show success message
+            const messageDiv = document.getElementById('login-message');
+            if (messageDiv) {
+                messageDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Barcode scanned successfully! Account ID filled automatically.</span>
+                    </div>
+                `;
             }
-            
-            // Stop scanner
-            stopScanner();
-            
-        }, 2000);
+        }
         
-    }, 3000);
+        // Stop scanner
+        stopScanner();
+        
+    }, 1500);
 }
 
-// Initialize scanner when page loads
-document.addEventListener('DOMContentLoaded', initBarcodeScanner);
+// Initialize when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBarcodeScanner);
+} else {
+    initBarcodeScanner();
+}
 
 // Export for browser
 if (typeof window !== 'undefined') {
