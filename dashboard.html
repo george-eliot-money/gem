@@ -146,6 +146,7 @@
             font-weight: bold;
             color: var(--secondary);
             margin: 20px 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         .account-info {
@@ -191,54 +192,6 @@
             font-size: 1.3em;
             color: var(--primary);
             margin-bottom: 10px;
-        }
-
-        /* Recent Transactions */
-        .section-title {
-            color: var(--primary);
-            font-size: 1.5em;
-            margin: 40px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary);
-        }
-
-        .transactions-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .transactions-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .transactions-table th {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: bold;
-        }
-
-        .transactions-table td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .transactions-table tr:hover {
-            background: #f9f9f9;
-        }
-
-        .transaction-positive {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-
-        .transaction-negative {
-            color: #F44336;
-            font-weight: bold;
         }
 
         /* Footer */
@@ -309,32 +262,6 @@
             background: #c82333;
         }
 
-        /* Language Selector */
-        .language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 5px;
-            border-radius: 5px;
-            display: flex;
-            gap: 5px;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        .lang-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header-top {
@@ -359,11 +286,6 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            
-            .transactions-table {
-                display: block;
-                overflow-x: auto;
-            }
         }
     </style>
 </head>
@@ -371,12 +293,6 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="language-selector">
-                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
-                <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-            </div>
-            
             <div class="header-top">
                 <div class="logo">
                     <i class="fas fa-university"></i>
@@ -397,7 +313,6 @@
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="dashboard.html" class="nav-link active"><i class="fas fa-dashboard"></i> Dashboard</a></li>
-                    <li><a href="transactions.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
                     <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> Account</a></li>
                 </ul>
             </nav>
@@ -416,30 +331,29 @@
             <!-- Balance Card -->
             <div class="balance-card">
                 <div class="balance-label">Available Balance</div>
-                <div class="balance-amount" id="current-balance">$0.00</div>
+                <div class="balance-amount" id="current-balance">Ǥ0.00</div>
                 <div class="account-info">
                     <div><strong>Account:</strong> <span id="account-number">-</span></div>
                     <div><strong>Type:</strong> <span id="account-type">-</span></div>
-                    <div><strong>Last Login:</strong> <span id="last-login">-</span></div>
                 </div>
             </div>
             
             <!-- Quick Actions -->
             <div class="quick-actions">
-                <div class="action-card" onclick="window.location.href='transactions.html'">
-                    <div class="action-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <div class="action-title">View All Transactions</div>
-                    <p>See complete transaction history</p>
-                </div>
-                
                 <div class="action-card" onclick="window.location.href='account.html'">
                     <div class="action-icon">
                         <i class="fas fa-user-circle"></i>
                     </div>
                     <div class="action-title">Account Settings</div>
                     <p>Update your personal information</p>
+                </div>
+                
+                <div class="action-card" onclick="showBarcode()">
+                    <div class="action-icon">
+                        <i class="fas fa-barcode"></i>
+                    </div>
+                    <div class="action-title">View Barcode</div>
+                    <p>Access your account barcode</p>
                 </div>
                 
                 <div class="action-card" onclick="transferFunds()">
@@ -457,28 +371,6 @@
                     <div class="action-title">Print Statement</div>
                     <p>Generate account statement</p>
                 </div>
-            </div>
-            
-            <!-- Recent Transactions -->
-            <h2 class="section-title">Recent Transactions</h2>
-            <div class="transactions-card">
-                <table class="transactions-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody id="transactions-body">
-                        <tr>
-                            <td colspan="4" style="text-align: center; padding: 30px;">
-                                <i class="fas fa-spinner fa-spin"></i> Loading transactions...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </main>
@@ -514,17 +406,40 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="database.js"></script>
     <script>
+        let bankDatabase = null;
+        let currentAccount = null;
+        
         // Check if user is logged in
-        const currentAccount = sessionStorage.getItem('currentAccount');
-        if (!currentAccount) {
-            window.location.href = 'index.html';
+        document.addEventListener('DOMContentLoaded', function() {
+            currentAccount = sessionStorage.getItem('currentAccount');
+            if (!currentAccount) {
+                window.location.href = 'index.html';
+            }
+            
+            loadDatabase();
+        });
+        
+        // Load database from JSON
+        async function loadDatabase() {
+            try {
+                const response = await fetch('database.json');
+                bankDatabase = await response.json();
+                loadDashboard();
+            } catch (error) {
+                console.error('Error loading database:', error);
+                alert('Error loading database. Please try again later.');
+            }
         }
-
+        
         // Load account data
         function loadDashboard() {
-            const account = BankDatabase.getAccount(currentAccount);
+            if (!bankDatabase || !currentAccount) {
+                logout();
+                return;
+            }
+            
+            const account = bankDatabase.accounts[currentAccount];
             if (!account) {
                 logout();
                 return;
@@ -534,66 +449,64 @@
             document.getElementById('welcome-user').textContent = `Welcome, ${account.name}`;
             
             // Update account info
-            document.getElementById('current-balance').textContent = BankDatabase.formatCurrency(account.balance);
-            document.getElementById('account-number').textContent = BankDatabase.formatAccountId(currentAccount);
+            document.getElementById('current-balance').textContent = formatCurrency(account.balance);
+            document.getElementById('account-number').textContent = formatAccountId(currentAccount);
             document.getElementById('account-type').textContent = account.type;
-            document.getElementById('last-login').textContent = account.lastLogin || new Date().toLocaleString();
             
             // Update welcome alert
             document.getElementById('alert-message').textContent = 
-                `Welcome back, ${account.name}! Your last login was ${account.lastLogin || 'today'}.`;
+                `Welcome back, ${account.name}!`;
+        }
+        
+        // Format currency with Ǥ symbol
+        function formatCurrency(amount) {
+            return `Ǥ${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+        
+        // Format account ID with spaces
+        function formatAccountId(accountId) {
+            if (!accountId) return '';
+            return accountId.match(/.{1,4}/g).join(' ');
+        }
+        
+        // Show barcode
+        function showBarcode() {
+            if (!currentAccount) return;
             
-            // Load transactions
-            const tbody = document.getElementById('transactions-body');
-            if (account.transactions && account.transactions.length > 0) {
-                const recentTransactions = account.transactions.slice(0, 5);
-                tbody.innerHTML = recentTransactions.map(transaction => `
-                    <tr>
-                        <td>${transaction.date}</td>
-                        <td>${transaction.description}</td>
-                        <td class="${transaction.amount >= 0 ? 'transaction-positive' : 'transaction-negative'}">
-                            ${transaction.amount >= 0 ? '+' : ''}${BankDatabase.formatCurrency(transaction.amount)}
-                        </td>
-                        <td>${BankDatabase.formatCurrency(transaction.balance)}</td>
-                    </tr>
-                `).join('');
+            // Find barcode for current account
+            let barcode = '';
+            for (const [barcodeKey, accountId] of Object.entries(bankDatabase.barcodes)) {
+                if (accountId === currentAccount) {
+                    barcode = barcodeKey;
+                    break;
+                }
+            }
+            
+            if (barcode) {
+                alert(`Your account barcode:\n\n${barcode}\n\nUse this barcode for quick login on the home page.`);
             } else {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="4" style="text-align: center; padding: 30px;">
-                            <i class="fas fa-info-circle"></i> No transactions found
-                        </td>
-                    </tr>
-                `;
+                alert('Barcode not found for your account.');
             }
         }
-
+        
+        // Quick action functions
+        function transferFunds() {
+            alert('Transfer functionality would be implemented here.\n\nIn a real banking system, this would open a transfer form.');
+        }
+        
+        function printStatement() {
+            alert('Print functionality would be implemented here.\n\nIn a real banking system, this would generate a PDF statement.');
+        }
+        
         // Logout function
         function logout() {
             sessionStorage.clear();
             window.location.href = 'index.html';
         }
-
-        // Quick action functions
-        function transferFunds() {
-            alert('Transfer functionality would be implemented here.\n\nIn a real banking system, this would open a transfer form.');
-        }
-
-        function printStatement() {
-            alert('Print functionality would be implemented here.\n\nIn a real banking system, this would generate a PDF statement.');
-        }
-
-        // Set language
-        function setLanguage(lang) {
-            if (window.setLanguage) {
-                window.setLanguage(lang);
-                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-                event.target.classList.add('active');
-            }
-        }
-
-        // Initialize dashboard on load
-        window.onload = loadDashboard;
+        
+        // Make functions available globally
+        window.formatCurrency = formatCurrency;
+        window.formatAccountId = formatAccountId;
     </script>
 </body>
 </html>
