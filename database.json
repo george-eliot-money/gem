@@ -6,9 +6,9 @@
       "balance": 2000.0,
       "accountNumber": "3120",
       "pin": "6458",
-      "email": "noah@georgeeliotbank.com",
-      "phone": "+1 (555) 123-4567",
-      "address": "123 Main Street, Anytown, USA"
+      "email": "noahbernocco@gmail.com",
+      "phone": "+212 665-937383",
+      "address": "My home"
     },
     "3586005802344415": {
       "name": "Laaroussi",
@@ -16,9 +16,9 @@
       "balance": 2000.0,
       "accountNumber": "4415",
       "pin": "2003",
-      "email": "laaroussi@georgeeliotbank.com",
-      "phone": "+1 (555) 234-5678",
-      "address": "456 Oak Avenue, Sometown, USA"
+      "email": "on ne sait pas",
+      "phone": "son iPhone 14 bleu napoleon importer du Canada par son grand fr\u00e9re qui \u00e9tudie l\u00e0-bas",
+      "address": "Had Soualem / Les Villas"
     },
     "0753245061559459": {
       "name": "nour18",
@@ -26,9 +26,9 @@
       "balance": 5000.0,
       "accountNumber": "9459",
       "pin": "2011",
-      "email": "nour@georgeeliotbank.com",
-      "phone": "+1 (555) 345-6789",
-      "address": "789 Pine Road, Othertown, USA"
+      "email": "L'ordinateur de sa soeur Manar",
+      "phone": "Son tel rose",
+      "address": "Le transport"
     },
     "4132993413947692": {
       "name": "Skibidi",
@@ -36,9 +36,9 @@
       "balance": 0.0,
       "accountNumber": "7692",
       "pin": "FVNE SHYT",
-      "email": "skibidi@georgeeliotbank.com",
-      "phone": "+1 (555) 456-7890",
-      "address": "101 Maple Drive, Newtown, USA"
+      "email": "i don't even know if u have one",
+      "phone": "UR iPhone 7 black (ik u have one and you are fakining  the fact you dont have one)",
+      "address": "IDFK"
     }
   },
   "barcodes": {
@@ -47,5 +47,5 @@
     "0753 2450 6155 9459": "0753245061559459",
     "4132 9934 1394 7692": "4132993413947692"
   },
-  "last_updated": "2026-02-04T16:17:00.978202"
+  "last_updated": "2026-02-04T16:55:26.093992"
 }
