@@ -234,20 +234,15 @@
             margin: 20px 0;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-
         /* Welcome Section */
         .welcome-section {
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 3px;
             margin-bottom: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border: 1px solid #DDDDDD;
+            text-align: center;
         }
 
         h2 {
@@ -255,175 +250,106 @@
             border-bottom: 2px solid var(--secondary);
             padding-bottom: 8px;
             margin-bottom: 20px;
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: bold;
         }
 
-        /* Bank Features */
+        .hero-text {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Quick Links Grid */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .link-card {
+            background: white;
+            padding: 30px;
+            border-radius: 3px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #DDDDDD;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .link-icon {
+            font-size: 3em;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .link-title {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
         }
 
         .feature-box {
             background: #f9f9f9;
-            padding: 15px;
+            padding: 25px;
             border-radius: 3px;
             border-left: 4px solid var(--accent);
         }
 
         .feature-icon {
             color: var(--primary);
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        /* Login Form */
-        .login-form {
-            background: var(--light);
-            padding: 25px;
-            border-radius: 3px;
-            border: 1px solid #DDDDDD;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
+            font-size: 1.8em;
             margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #CCCCCC;
-            border-radius: 3px;
-            font-size: 14px;
-        }
-
-        input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 5px rgba(0,102,204,0.3);
-        }
-
-        /* Buttons */
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .btn-block {
-            width: 100%;
-            display: block;
-        }
-
-        /* Barcode Scanner */
-        .barcode-section {
-            background: white;
-            padding: 25px;
-            border-radius: 3px;
-            margin: 20px 0;
-            border: 1px solid #DDDDDD;
-            text-align: center;
-        }
-
-        #scanner-container {
-            width: 100%;
-            max-width: 500px;
-            height: 200px;
-            margin: 20px auto;
-            border: 3px dashed var(--primary);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        .barcode-input {
-            width: 100%;
-            max-width: 500px;
-            padding: 12px;
-            font-size: 16px;
-            text-align: center;
-            border: 2px solid var(--primary);
-            border-radius: 5px;
-            margin: 10px 0;
         }
 
         /* Demo Accounts */
         .demo-section {
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 3px;
-            margin-top: 20px;
+            margin: 40px 0;
             border: 1px solid #DDDDDD;
         }
 
         .demo-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.9em;
+            margin-top: 20px;
         }
 
         .demo-table th {
             background: var(--primary);
             color: white;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
 
         .demo-table td {
-            padding: 8px;
+            padding: 12px;
             border-bottom: 1px solid #ddd;
         }
 
-        /* Alert */
-        .alert {
-            padding: 12px;
-            border-radius: 3px;
-            margin-bottom: 15px;
-            border-left: 4px solid;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left-color: var(--danger);
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left-color: var(--success);
+        .demo-table tr:hover {
+            background: #f9f9f9;
         }
 
         /* Info Alert */
@@ -431,6 +357,10 @@
             background: #d1ecf1;
             color: #0c5460;
             border-left-color: var(--accent);
+            padding: 15px;
+            border-radius: 3px;
+            margin: 20px 0;
+            border-left: 4px solid;
         }
 
         /* Footer */
@@ -470,10 +400,6 @@
                 padding: 0 15px;
             }
             
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .formulary-banner-content {
                 flex-direction: column;
                 gap: 10px;
@@ -481,6 +407,16 @@
             }
             
             .formulary-text {
+                text-align: center;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .system-info {
                 text-align: center;
             }
             
@@ -492,14 +428,15 @@
                 margin-bottom: 5px;
             }
             
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .language-selector {
                 position: static;
                 margin: 10px 0;
                 justify-content: center;
+                background: rgba(255,255,255,0.2);
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -543,14 +480,15 @@
                 </div>
                 <div class="system-info">
                     <div><strong>System:</strong> Online Banking v2.0</div>
-                    <div><strong>Status:</strong> <span style="color: #4CAF50;">Secure</span></div>
-                    <div><i class="fas fa-shield-alt"></i> Barcode Scanner Enabled</div>
+                    <div><strong>Status:</strong> <span style="color: #4CAF50;">Operational</span></div>
+                    <div><i class="fas fa-shield-alt"></i> JSON Database System</div>
                 </div>
             </div>
             
             <nav>
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="login.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                     <li><a href="dashboard.html" class="nav-link"><i class="fas fa-dashboard"></i> Dashboard</a></li>
                     <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> Account</a></li>
                 </ul>
@@ -561,158 +499,152 @@
     <!-- Main Content -->
     <main class="container">
         <div class="main-content">
-            <div class="content-grid">
-                <!-- Left Column: Bank Info & Features -->
-                <div>
-                    <!-- Welcome Section -->
-                    <div class="welcome-section">
-                        <h2>Welcome to George Eliot Bank</h2>
-                        <p>Experience secure banking with our 2012-style business platform. Access your account using barcode scanning or manual entry.</p>
-                        
-                        <div class="alert info-alert">
-                            <i class="fas fa-info-circle"></i> 
-                            <span>This system uses JSON database storage and supports barcode scanning for quick account access.</span>
-                        </div>
-                    </div>
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h2>Welcome to George Eliot Bank</h2>
+                <p class="hero-text">
+                    Experience secure banking with our 2012-style business platform. 
+                    Trusted by thousands of customers for over a decade, we provide 
+                    reliable banking solutions with cutting-edge security.
+                </p>
+                
+                <div class="info-alert">
+                    <i class="fas fa-info-circle"></i> 
+                    <span>This system uses JSON database storage and supports barcode scanning for quick account access.</span>
+                </div>
+            </div>
 
-                    <!-- Bank Features -->
-                    <div class="welcome-section">
-                        <h2>Bank Features</h2>
-                        <div class="features-grid">
-                            <div class="feature-box">
-                                <div class="feature-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <h3>Secure Banking</h3>
-                                <p>Military-grade encryption for all transactions and account data protection.</p>
-                            </div>
-                            
-                            <div class="feature-box">
-                                <div class="feature-icon">
-                                    <i class="fas fa-barcode"></i>
-                                </div>
-                                <h3>Barcode Scanner</h3>
-                                <p>Quick login with barcode technology using your device camera.</p>
-                            </div>
-                            
-                            <div class="feature-box">
-                                <div class="feature-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <h3>Mobile Ready</h3>
-                                <p>Access your account from any device with responsive design.</p>
-                            </div>
-                            
-                            <div class="feature-box">
-                                <div class="feature-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <h3>Multi-language</h3>
-                                <p>Available in English, Arabic, and French for global customers.</p>
-                            </div>
-                        </div>
+            <!-- Quick Links Grid -->
+            <div class="links-grid">
+                <div class="link-card" onclick="window.location.href='login.html'">
+                    <div class="link-icon">
+                        <i class="fas fa-lock"></i>
                     </div>
-
-                    <!-- Demo Accounts -->
-                    <div class="demo-section">
-                        <h2>Demo Accounts</h2>
-                        <p>Try our banking system with these demo accounts:</p>
-                        
-                        <table class="demo-table">
-                            <thead>
-                                <tr>
-                                    <th>Account Holder</th>
-                                    <th>Barcode</th>
-                                    <th>PIN</th>
-                                    <th>Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Noah Perso</strong></td>
-                                    <td><code>5673 9183 4624 3120</code></td>
-                                    <td><code>6458</code></td>
-                                    <td>Premium Checking</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Laaroussi</strong></td>
-                                    <td><code>3586 0058 0234 4415</code></td>
-                                    <td><code>2003</code></td>
-                                    <td>Savings Account</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>nour18</strong></td>
-                                    <td><code>0753 2450 6155 9459</code></td>
-                                    <td><code>2011</code></td>
-                                    <td>Student Account</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Skibidi</strong></td>
-                                    <td><code>4132 9934 1394 7692</code></td>
-                                    <td><code>FVNE SHYT</code></td>
-                                    <td>Business Account</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h3 class="link-title">Secure Login</h3>
+                    <p>Access your bank account with secure credentials or barcode scanner</p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
+                            Go to Login Page
+                        </button>
                     </div>
                 </div>
+                
+                <div class="link-card" onclick="window.location.href='dashboard.html'">
+                    <div class="link-icon">
+                        <i class="fas fa-dashboard"></i>
+                    </div>
+                    <h3 class="link-title">Account Dashboard</h3>
+                    <p>View your balance, account details, and banking information</p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" style="background: var(--secondary); color: var(--primary); border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
+                            View Dashboard
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="link-card" onclick="window.location.href='account.html'">
+                    <div class="link-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 class="link-title">Account Settings</h3>
+                    <p>Manage your personal information and account preferences</p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
+                            Manage Account
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <!-- Right Column: Login Form -->
-                <div>
-                    <!-- Login Form -->
-                    <div class="login-form">
-                        <h2>Account Login</h2>
-                        <div id="login-message"></div>
-                        
-                        <!-- Barcode Scanner Section -->
-                        <div class="barcode-section">
-                            <h3>Quick Login with Barcode</h3>
-                            <div id="scanner-container"></div>
-                            <div style="margin: 15px 0;">
-                                <button class="btn btn-secondary" onclick="startScanner()" id="start-scanner">
-                                    <i class="fas fa-camera"></i> Start Barcode Scanner
-                                </button>
-                                <button class="btn" onclick="stopScanner()" id="stop-scanner" style="display: none;">
-                                    <i class="fas fa-stop"></i> Stop Scanner
-                                </button>
-                            </div>
-                            <p>- OR -</p>
-                            <input type="text" class="barcode-input" id="manual-barcode" 
-                                   placeholder="Enter barcode (e.g., 5673 9183 4624 3120)">
+            <!-- Bank Features -->
+            <div class="welcome-section">
+                <h2>Bank Features</h2>
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        
-                        <!-- Login Form -->
-                        <form id="loginForm" onsubmit="event.preventDefault(); loginAccount();">
-                            <div class="form-group">
-                                <label for="account-id">Account ID</label>
-                                <input type="text" id="account-id" 
-                                       placeholder="Enter 16-digit account ID" 
-                                       maxlength="16"
-                                       required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="pin">PIN Code</label>
-                                <input type="password" id="pin" 
-                                       placeholder="Enter your PIN" 
-                                       required>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-block">
-                                <i class="fas fa-sign-in-alt"></i> Login to Account
-                            </button>
-                        </form>
+                        <h3>Bank-Grade Security</h3>
+                        <p>Military-grade encryption and multi-factor authentication protect your accounts 24/7.</p>
                     </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <h3>Barcode Scanning</h3>
+                        <p>Quick login with barcode scanner technology. No need to remember complex passwords.</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Banking</h3>
+                        <p>Access your accounts from any device, anywhere. Full mobile-responsive design.</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Multi-language</h3>
+                        <p>Available in English, Arabic, and French. Banking in your preferred language.</p>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Quick Info -->
-                    <div class="welcome-section" style="margin-top: 20px;">
-                        <h3>Quick Information</h3>
-                        <p><strong>Currency:</strong> <span class="currency">Ǥ (George Eliot Dollar)</span></p>
-                        <p><strong>Account IDs:</strong> 16-digit numbers</p>
-                        <p><strong>Barcodes:</strong> Account IDs with spaces every 4 digits</p>
-                        <p><strong>Support:</strong> 1-800-BANK-GEB</p>
-                        <p><strong>Hours:</strong> Mon-Fri 9AM-6PM</p>
-                    </div>
+            <!-- Demo Accounts -->
+            <div class="demo-section">
+                <h2>Demo Accounts</h2>
+                <p>Try our banking system with these demo accounts. Perfect for testing and demonstration purposes.</p>
+                
+                <table class="demo-table">
+                    <thead>
+                        <tr>
+                            <th>Account Holder</th>
+                            <th>Barcode</th>
+                            <th>Account ID</th>
+                            <th>PIN</th>
+                            <th>Account Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Noah Perso</strong></td>
+                            <td><code>5673 9183 4624 3120</code></td>
+                            <td><code>5673918346243120</code></td>
+                            <td><code>6458</code></td>
+                            <td>Premium Checking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Laaroussi</strong></td>
+                            <td><code>3586 0058 0234 4415</code></td>
+                            <td><code>3586005802344415</code></td>
+                            <td><code>2003</code></td>
+                            <td>Savings Account</td>
+                        </tr>
+                        <tr>
+                            <td><strong>nour18</strong></td>
+                            <td><code>0753 2450 6155 9459</code></td>
+                            <td><code>0753245061559459</code></td>
+                            <td><code>2011</code></td>
+                            <td>Student Account</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skibidi</strong></td>
+                            <td><code>4132 9934 1394 7692</code></td>
+                            <td><code>4132993413947692</code></td>
+                            <td><code>FVNE SHYT</code></td>
+                            <td>Business Account</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="login.html" style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 3px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-sign-in-alt"></i> Try Demo Login
+                    </a>
                 </div>
             </div>
         </div>
@@ -737,6 +669,7 @@
                 <div>
                     <h3 style="color: var(--secondary); margin-bottom: 10px;">Quick Links</h3>
                     <p><a href="index.html" style="color: white;">Home</a></p>
+                    <p><a href="login.html" style="color: white;">Login</a></p>
                     <p><a href="dashboard.html" style="color: white;">Dashboard</a></p>
                     <p><a href="account.html" style="color: white;">Account</a></p>
                 </div>
@@ -750,27 +683,7 @@
 
     <!-- JavaScript -->
     <script src="translations.js"></script>
-    <script src="scanner.js"></script>
     <script>
-        let bankDatabase = null;
-        
-        // Load database and translations on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadDatabase();
-            initBarcodeScanner();
-            
-            // Check if already logged in
-            const currentAccount = sessionStorage.getItem('currentAccount');
-            if (currentAccount) {
-                window.location.href = 'dashboard.html';
-            }
-            
-            // Load translations
-            if (typeof loadTranslations === 'function') {
-                loadTranslations();
-            }
-        });
-        
         // Formulary banner functions
         function closeBanner() {
             const banner = document.getElementById('formularyBanner');
@@ -783,112 +696,6 @@
             document.getElementById('formularyBanner').style.display = 'none';
         }
         
-        // Load database from JSON
-        async function loadDatabase() {
-            try {
-                const response = await fetch('database.json');
-                bankDatabase = await response.json();
-                console.log('Database loaded successfully');
-            } catch (error) {
-                console.error('Error loading database:', error);
-                showAlert('Error loading database. Please try again later.', 'error', 
-                          document.getElementById('login-message'));
-            }
-        }
-        
-        // Login function
-        function loginAccount() {
-            if (!bankDatabase) {
-                showAlert('Database not loaded. Please refresh the page.', 'error', 
-                          document.getElementById('login-message'));
-                return;
-            }
-            
-            let accountId = document.getElementById('account-id').value.trim();
-            const pin = document.getElementById('pin').value.trim();
-            const messageDiv = document.getElementById('login-message');
-            
-            // Clean account ID (remove spaces)
-            accountId = accountId.replace(/\s+/g, '');
-            
-            // Validate account ID
-            if (!accountId || accountId.length !== 16) {
-                showAlert('Please enter a valid 16-digit Account ID', 'error', messageDiv);
-                return;
-            }
-            
-            if (!pin) {
-                showAlert('Please enter your PIN', 'error', messageDiv);
-                return;
-            }
-            
-            // Get account from database
-            const account = bankDatabase.accounts[accountId];
-            
-            if (!account) {
-                showAlert('Account not found. Please check your Account ID.', 'error', messageDiv);
-                return;
-            }
-            
-            // Check PIN (case-sensitive)
-            if (account.pin !== pin) {
-                showAlert('Invalid PIN. Please try again.', 'error', messageDiv);
-                return;
-            }
-            
-            // Store account in session
-            sessionStorage.setItem('currentAccount', accountId);
-            sessionStorage.setItem('accountName', account.name);
-            
-            // Show success message
-            showAlert('Login successful! Redirecting to dashboard...', 'success', messageDiv);
-            
-            // Redirect to dashboard after 1 second
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 1000);
-        }
-        
-        // Alert function
-        function showAlert(message, type, container) {
-            const alertClass = type === 'error' ? 'alert-error' : 'alert-success';
-            const icon = type === 'error' ? 'exclamation-circle' : 'check-circle';
-            
-            container.innerHTML = `
-                <div class="alert ${alertClass}">
-                    <i class="fas fa-${icon}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-        }
-        
-        // Auto-fill from barcode input
-        document.getElementById('manual-barcode').addEventListener('input', function(e) {
-            const value = this.value.trim();
-            
-            // Check if barcode exists in database
-            if (bankDatabase && bankDatabase.barcodes[value]) {
-                const accountId = bankDatabase.barcodes[value];
-                document.getElementById('account-id').value = accountId;
-                document.getElementById('pin').focus();
-                
-                // Show success message
-                const messageDiv = document.getElementById('login-message');
-                showAlert('Barcode recognized! Account ID filled automatically.', 'success', messageDiv);
-            }
-        });
-        
-        // Format currency with Ǥ symbol
-        function formatCurrency(amount) {
-            return `Ǥ${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        }
-        
-        // Format account ID with spaces
-        function formatAccountId(accountId) {
-            if (!accountId) return '';
-            return accountId.match(/.{1,4}/g).join(' ');
-        }
-        
         // Set language
         function setLanguage(lang) {
             if (window.setLanguage) {
@@ -898,10 +705,20 @@
             }
         }
         
-        // Make functions available globally
+        // Load translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof loadTranslations === 'function') {
+                loadTranslations();
+            }
+        });
+        
+        // Format currency with Ǥ symbol
+        function formatCurrency(amount) {
+            return `Ǥ${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+        
+        // Make function available globally
         window.formatCurrency = formatCurrency;
-        window.formatAccountId = formatAccountId;
-        window.bankDatabase = bankDatabase;
     </script>
 </body>
 </html>
