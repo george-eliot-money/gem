@@ -300,6 +300,12 @@
             margin-bottom: 10px;
         }
 
+        .link-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
         /* Features Grid */
         .features-grid {
             display: grid;
@@ -321,37 +327,6 @@
             margin-bottom: 15px;
         }
 
-        /* Demo Accounts */
-        .demo-section {
-            background: white;
-            padding: 30px;
-            border-radius: 3px;
-            margin: 40px 0;
-            border: 1px solid #DDDDDD;
-        }
-
-        .demo-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .demo-table th {
-            background: var(--primary);
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .demo-table td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .demo-table tr:hover {
-            background: #f9f9f9;
-        }
-
         /* Info Alert */
         .info-alert {
             background: #d1ecf1;
@@ -361,6 +336,33 @@
             border-radius: 3px;
             margin: 20px 0;
             border-left: 4px solid;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 3px;
+            margin: 40px 0;
+            border: 1px solid #DDDDDD;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            padding: 15px;
+        }
+
+        .contact-icon {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
 
         /* Footer */
@@ -386,11 +388,30 @@
             color: #999999;
         }
 
-        /* Currency */
-        .currency {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #4CAF50;
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
             font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--primary);
         }
 
         /* Responsive */
@@ -437,6 +458,12 @@
             
             .links-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
             }
         }
     </style>
@@ -521,11 +548,15 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <h3 class="link-title">Secure Login</h3>
-                    <p>Access your bank account with secure credentials or barcode scanner</p>
+                    <p class="link-description">
+                        Access your bank account with secure credentials or use our 
+                        barcode scanner for quick login. Military-grade encryption 
+                        protects all your transactions.
+                    </p>
                     <div style="margin-top: 20px;">
-                        <button class="btn" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
-                            Go to Login Page
-                        </button>
+                        <a href="login.html" class="btn">
+                            <i class="fas fa-sign-in-alt"></i> Go to Login
+                        </a>
                     </div>
                 </div>
                 
@@ -534,11 +565,15 @@
                         <i class="fas fa-dashboard"></i>
                     </div>
                     <h3 class="link-title">Account Dashboard</h3>
-                    <p>View your balance, account details, and banking information</p>
+                    <p class="link-description">
+                        View your account balance, transaction history, and banking 
+                        information in a clean, organized dashboard. Monitor your 
+                        finances with real-time updates.
+                    </p>
                     <div style="margin-top: 20px;">
-                        <button class="btn" style="background: var(--secondary); color: var(--primary); border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
-                            View Dashboard
-                        </button>
+                        <a href="dashboard.html" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i> View Dashboard
+                        </a>
                     </div>
                 </div>
                 
@@ -547,11 +582,15 @@
                         <i class="fas fa-user-circle"></i>
                     </div>
                     <h3 class="link-title">Account Settings</h3>
-                    <p>Manage your personal information and account preferences</p>
+                    <p class="link-description">
+                        Manage your personal information, update contact details, 
+                        view your account barcode, and configure your banking 
+                        preferences in one place.
+                    </p>
                     <div style="margin-top: 20px;">
-                        <button class="btn" style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
-                            Manage Account
-                        </button>
+                        <a href="account.html" class="btn" style="background: var(--accent);">
+                            <i class="fas fa-cog"></i> Manage Account
+                        </a>
                     </div>
                 </div>
             </div>
@@ -565,7 +604,7 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Bank-Grade Security</h3>
-                        <p>Military-grade encryption and multi-factor authentication protect your accounts 24/7.</p>
+                        <p>Military-grade encryption and multi-factor authentication protect your accounts 24/7 with advanced security protocols.</p>
                     </div>
                     
                     <div class="feature-box">
@@ -573,7 +612,7 @@
                             <i class="fas fa-barcode"></i>
                         </div>
                         <h3>Barcode Scanning</h3>
-                        <p>Quick login with barcode scanner technology. No need to remember complex passwords.</p>
+                        <p>Quick login with barcode scanner technology. Simply scan your account barcode for instant access.</p>
                     </div>
                     
                     <div class="feature-box">
@@ -581,7 +620,7 @@
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <h3>Mobile Banking</h3>
-                        <p>Access your accounts from any device, anywhere. Full mobile-responsive design.</p>
+                        <p>Access your accounts from any device, anywhere. Full mobile-responsive design for banking on the go.</p>
                     </div>
                     
                     <div class="feature-box">
@@ -589,62 +628,46 @@
                             <i class="fas fa-globe"></i>
                         </div>
                         <h3>Multi-language</h3>
-                        <p>Available in English, Arabic, and French. Banking in your preferred language.</p>
+                        <p>Available in English, Arabic, and French. Bank in your preferred language with full translation support.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Demo Accounts -->
-            <div class="demo-section">
-                <h2>Demo Accounts</h2>
-                <p>Try our banking system with these demo accounts. Perfect for testing and demonstration purposes.</p>
-                
-                <table class="demo-table">
-                    <thead>
-                        <tr>
-                            <th>Account Holder</th>
-                            <th>Barcode</th>
-                            <th>Account ID</th>
-                            <th>PIN</th>
-                            <th>Account Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Noah Perso</strong></td>
-                            <td><code>5673 9183 4624 3120</code></td>
-                            <td><code>5673918346243120</code></td>
-                            <td><code>6458</code></td>
-                            <td>Premium Checking</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Laaroussi</strong></td>
-                            <td><code>3586 0058 0234 4415</code></td>
-                            <td><code>3586005802344415</code></td>
-                            <td><code>2003</code></td>
-                            <td>Savings Account</td>
-                        </tr>
-                        <tr>
-                            <td><strong>nour18</strong></td>
-                            <td><code>0753 2450 6155 9459</code></td>
-                            <td><code>0753245061559459</code></td>
-                            <td><code>2011</code></td>
-                            <td>Student Account</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Skibidi</strong></td>
-                            <td><code>4132 9934 1394 7692</code></td>
-                            <td><code>4132993413947692</code></td>
-                            <td><code>FVNE SHYT</code></td>
-                            <td>Business Account</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div style="text-align: center; margin-top: 25px;">
-                    <a href="login.html" style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 3px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-sign-in-alt"></i> Try Demo Login
-                    </a>
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Address</h3>
+                        <p>123 Banking Street<br>Financial District</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone</h3>
+                        <p>1-800-BANK-GEB<br>24/7 Support Available</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>support@georgeeliotbank.com<br>info@georgeeliotbank.com</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Business Hours</h3>
+                        <p>Mon-Fri: 9AM-6PM<br>Sat: 10AM-2PM<br>Sun: Closed</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -656,22 +679,25 @@
             <div class="footer-content">
                 <div>
                     <h3 style="color: var(--secondary); margin-bottom: 10px;">George Eliot Bank</h3>
-                    <p>123 Banking Street, Financial District</p>
-                    <p>Phone: 1-800-BANK-GEB</p>
-                    <p>Email: support@georgeeliotbank.com</p>
+                    <p>Providing secure banking solutions since 2012. Your trust is our priority.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Banking Street, Financial District</p>
+                    <p><i class="fas fa-phone"></i> 1-800-BANK-GEB</p>
                 </div>
-                <div>
-                    <h3 style="color: var(--secondary); margin-bottom: 10px;">Business Hours</h3>
-                    <p>Mon-Fri: 9:00 AM - 6:00 PM</p>
-                    <p>Saturday: 10:00 AM - 2:00 PM</p>
-                    <p>Sunday: Closed</p>
-                </div>
+                
                 <div>
                     <h3 style="color: var(--secondary); margin-bottom: 10px;">Quick Links</h3>
                     <p><a href="index.html" style="color: white;">Home</a></p>
                     <p><a href="login.html" style="color: white;">Login</a></p>
                     <p><a href="dashboard.html" style="color: white;">Dashboard</a></p>
                     <p><a href="account.html" style="color: white;">Account</a></p>
+                </div>
+                
+                <div>
+                    <h3 style="color: var(--secondary); margin-bottom: 10px;">Technology</h3>
+                    <p><i class="fas fa-database"></i> JSON Database System</p>
+                    <p><i class="fas fa-barcode"></i> Barcode Scanner</p>
+                    <p><i class="fas fa-shield-alt"></i> 256-bit Encryption</p>
+                    <p><i class="fas fa-mobile-alt"></i> Mobile Responsive</p>
                 </div>
             </div>
             <div class="copyright">
@@ -711,14 +737,6 @@
                 loadTranslations();
             }
         });
-        
-        // Format currency with Ǥ symbol
-        function formatCurrency(amount) {
-            return `Ǥ${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        }
-        
-        // Make function available globally
-        window.formatCurrency = formatCurrency;
     </script>
 </body>
 </html>
