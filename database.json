@@ -8,7 +8,8 @@
       "pin": "6458",
       "email": "noahbernocco@gmail.com",
       "phone": "+212 665-937383",
-      "address": "My home"
+      "address": "My home",
+      "transactions": []
     },
     "3586005802344415": {
       "name": "Laaroussi",
@@ -18,7 +19,8 @@
       "pin": "2003",
       "email": "on ne sait pas",
       "phone": "son iPhone 14 bleu napoleon importer du Canada par son grand fr\u00e9re qui \u00e9tudie l\u00e0-bas",
-      "address": "Had Soualem / Les Villas"
+      "address": "Had Soualem / Les Villas",
+      "transactions": []
     },
     "0753245061559459": {
       "name": "nour18",
@@ -28,7 +30,8 @@
       "pin": "2011",
       "email": "L'ordinateur de sa soeur Manar",
       "phone": "Son tel rose",
-      "address": "Le transport"
+      "address": "Le transport",
+      "transactions": []
     },
     "4132993413947692": {
       "name": "Skibidi",
@@ -38,14 +41,103 @@
       "pin": "FVNE SHYT",
       "email": "i don't even know if u have one",
       "phone": "UR iPhone 7 black (ik u have one and you are fakining  the fact you dont have one)",
-      "address": "IDFK"
+      "address": "IDFK",
+      "transactions": []
+    },
+    "5533687768656362": {
+      "name": "Ramito",
+      "type": "Student Account",
+      "balance": 0,
+      "accountNumber": "6362",
+      "pin": "2940",
+      "email": "",
+      "phone": "06078807",
+      "address": "",
+      "transactions": [
+        {
+          "id": "TXN14026",
+          "date": "2026-02-06",
+          "description": "Account Opening Deposit",
+          "type": "DEPOSIT",
+          "amount": 0,
+          "balance": 0,
+          "status": "COMPLETED"
+        }
+      ]
+    },
+    "4501264972142202": {
+      "name": "Medula",
+      "type": "Student Account",
+      "balance": 0,
+      "accountNumber": "2202",
+      "pin": "1312",
+      "email": "lahlomohamed74@gmail.com",
+      "phone": "06462092011",
+      "address": "",
+      "transactions": [
+        {
+          "id": "TXN99363",
+          "date": "2026-02-06",
+          "description": "Account Opening Deposit",
+          "type": "DEPOSIT",
+          "amount": 0,
+          "balance": 0,
+          "status": "COMPLETED"
+        }
+      ]
+    },
+    "8090657144375285": {
+      "name": "RIP",
+      "type": "Student Account",
+      "balance": 0,
+      "accountNumber": "5285",
+      "pin": "1998",
+      "email": "",
+      "phone": "0690545252",
+      "address": "",
+      "transactions": [
+        {
+          "id": "TXN41720",
+          "date": "2026-02-06",
+          "description": "Account Opening Deposit",
+          "type": "DEPOSIT",
+          "amount": 0,
+          "balance": 0,
+          "status": "COMPLETED"
+        }
+      ]
+    },
+    "4091489811474072": {
+      "name": "IMR.AMR",
+      "type": "Student Account",
+      "balance": 0,
+      "accountNumber": "4072",
+      "pin": "1937",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "transactions": [
+        {
+          "id": "TXN38777",
+          "date": "2026-02-06",
+          "description": "Account Opening Deposit",
+          "type": "DEPOSIT",
+          "amount": 0,
+          "balance": 0,
+          "status": "COMPLETED"
+        }
+      ]
     }
   },
   "barcodes": {
     "5673 9183 4624 3120": "5673918346243120",
     "3586 0058 0234 4415": "3586005802344415",
     "0753 2450 6155 9459": "0753245061559459",
-    "4132 9934 1394 7692": "4132993413947692"
+    "4132 9934 1394 7692": "4132993413947692",
+    "5533 6877 6865 6362": "5533687768656362",
+    "4501 2649 7214 2202": "4501264972142202",
+    "8090 6571 4437 5285": "8090657144375285",
+    "4091 4898 1147 4072": "4091489811474072"
   },
-  "last_updated": "2026-02-04T16:55:26.093992"
+  "last_updated": "2026-02-06T16:33:39.269416"
 }
